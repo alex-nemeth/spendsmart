@@ -3,6 +3,7 @@ import {
     UNCATEGORIZED_BUDGET_ID,
     useBudgets,
 } from "../contexts/BudgetsContext";
+import { currencyFormatter } from "../utils";
 
 export default function ViewExpensesModal({ budgetId, handleClose }) {
     const { getBudgetExpenses, budgets, deleteBudget, deleteExpense } =
@@ -12,6 +13,8 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
         UNCATEGORIZED_BUDGET_ID === budgetId
             ? { name: "Uncategorized", id: UNCATEGORIZED_BUDGET_ID }
             : budgets.find((budget) => budget.id === budgetId);
+
+    const expenses = getBudgetExpenses(budgetId);
 
     return (
         <div
@@ -59,6 +62,34 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                                 )}
                             </div>
                         </h3>
+                    </div>
+                    <div className="flex flex-col gap-3">
+                        {expenses.map((expense) => (
+                            <div className="flex gap-2" key={expense.id}>
+                                <div className="me-auto text-sm">
+                                    {expense.description}
+                                </div>
+                                <div className="text-md">
+                                    {currencyFormatter.format(expense.amount)}
+                                </div>
+                                <button onClick={() => deleteExpense(expense)}>
+                                    {" "}
+                                    <svg
+                                        aria-hidden="true"
+                                        className="w-5 h-5"
+                                        fill="currentColor"
+                                        viewBox="0 0 20 20"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                            clip-rule="evenodd"
+                                        ></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
