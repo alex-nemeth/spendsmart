@@ -1,6 +1,12 @@
 import { currencyFormatter } from "../utils";
 
-export default function BudgetCard({ name, amount, max, gray }) {
+export default function BudgetCard({
+    name,
+    amount,
+    max,
+    gray,
+    onAddExpenseClick,
+}) {
     const classNames = [];
     if (amount > max) classNames.push("bg-red-500/[0.25]");
     else if (gray) classNames.push("bg-gray-200/[0.2]");
@@ -28,7 +34,10 @@ export default function BudgetCard({ name, amount, max, gray }) {
                 ></div>
             </div>
             <div className="flex gap-2 mt-4">
-                <button className="border-blue-500 border-2 p-2 text-blue-500 rounded-md ms-auto">
+                <button
+                    className="border-blue-500 border-2 p-2 text-blue-500 rounded-md ms-auto"
+                    onClick={onAddExpenseClick}
+                >
                     Add Expense
                 </button>
                 <button className="border-gray-400 border-2 p-2 text-gray-500 rounded-md">
