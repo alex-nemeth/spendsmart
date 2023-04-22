@@ -10,3 +10,8 @@
         box-shadow: theme("boxShadow.xl");
     }
 }
+
+body {
+    background-color: #052e16;
+    color: white;
+}

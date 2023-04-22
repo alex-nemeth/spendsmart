@@ -6,7 +6,9 @@ export default function BudgetCard({ name, amount, max, gray }) {
     else if (gray) classNames.push("bg-gray-200/[0.2]");
 
     return (
-        <div className={`card flex flex-col ${classNames.join(" ")}`}>
+        <div
+            className={`card flex flex-col text-black ${classNames.join(" ")}`}
+        >
             <div className="flex justify-between items-baseline font-normal mb-3">
                 <div>{name}</div>
                 <div className="flex items-baseline">
