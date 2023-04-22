@@ -5,6 +5,7 @@ export default function BudgetCard({
     amount,
     max,
     gray,
+    hideButtons,
     onAddExpenseClick,
 }) {
     const classNames = [];
@@ -37,17 +38,19 @@ export default function BudgetCard({
                     ></div>
                 </div>
             )}
-            <div className="flex gap-2 mt-4">
-                <button
-                    className="border-blue-500 border-2 p-2 text-blue-500 rounded-md ms-auto"
-                    onClick={onAddExpenseClick}
-                >
-                    Add Expense
-                </button>
-                <button className="border-gray-400 border-2 p-2 text-gray-500 rounded-md">
-                    View Expenses
-                </button>
-            </div>
+            {!hideButtons && (
+                <div className="flex gap-2 mt-4">
+                    <button
+                        className="border-blue-500 border-2 p-2 text-blue-500 rounded-md ms-auto"
+                        onClick={onAddExpenseClick}
+                    >
+                        Add Expense
+                    </button>
+                    <button className="border-gray-400 border-2 p-2 text-gray-500 rounded-md">
+                        View Expenses
+                    </button>
+                </div>
+            )}
         </div>
     );
 }
