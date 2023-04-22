@@ -2,9 +2,12 @@ import { useState } from "react";
 import BudgetCard from "./components/BudgetCard";
 import AddBudgetModal from "./components/AddBudgetModal";
 import { useBudgets } from "./contexts/BudgetsContext";
+import AddExpenseModal from "./components/AddExpenseModal ";
 
 function App() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
+    const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
+
     const { budgets, getBudgetExpenses } = useBudgets();
     return (
         <>
@@ -17,7 +20,12 @@ function App() {
                     >
                         Add Budget
                     </button>
-                    <button className="border-2">Add Expense</button>
+                    <button
+                        className="border-2"
+                        onClick={() => setShowAddExpenseModal(true)}
+                    >
+                        Add Expense
+                    </button>
                 </div>
                 <div className="grid grid-cols-1 gap-1 items-start">
                     {budgets.map((budget) => {
@@ -39,6 +47,10 @@ function App() {
             <AddBudgetModal
                 show={showAddBudgetModal}
                 handleClose={() => setShowAddBudgetModal(false)}
+            />
+            <AddExpenseModal
+                show={showAddExpenseModal}
+                handleClose={() => setShowAddExpenseModal(false)}
             />
         </>
     );
