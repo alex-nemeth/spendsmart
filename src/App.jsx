@@ -1,14 +1,17 @@
 import { useState } from "react";
 import BudgetCard from "./components/BudgetCard";
 import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard";
-import AddBudgetModal from "./components/AddBudgetModal";
-import { useBudgets } from "./contexts/BudgetsContext";
-import AddExpenseModal from "./components/AddExpenseModal ";
 import TotalBudgetCard from "./components/TotalBudgetCard";
+import AddBudgetModal from "./components/AddBudgetModal";
+import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "./contexts/BudgetsContext";
+import AddExpenseModal from "./components/AddExpenseModal ";
+import ViewExpensesModal from "./components/ViewExpensesModal";
 
 function App() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
     const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
+    const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] =
+        useState();
     const [addExpenseModalBudgetId, setAddExpenseModalBudgetId] = useState();
 
     const { budgets, getBudgetExpenses } = useBudgets();
@@ -55,11 +58,19 @@ function App() {
                                 onAddExpenseClick={() =>
                                     openAddExpenseModal(budget.id)
                                 }
+                                onViewExpensesClick={() =>
+                                    setViewExpensesModalBudgetId(budget.id)
+                                }
                             />
                         );
                     })}
                     <UncategorizedBudgetCard
                         onAddExpenseClick={openAddExpenseModal}
+                        onViewExpensesClick={() =>
+                            setViewExpensesModalBudgetId(
+                                UNCATEGORIZED_BUDGET_ID
+                            )
+                        }
                     />
                     <TotalBudgetCard />
                 </div>
@@ -72,6 +83,10 @@ function App() {
                 show={showAddExpenseModal}
                 defaultBudgetId={addExpenseModalBudgetId}
                 handleClose={() => setShowAddExpenseModal(false)}
+            />
+            <ViewExpensesModal
+                budgetId={viewExpensesModalBudgetId}
+                handleClose={() => setViewExpensesModalBudgetId()}
             />
         </>
     );

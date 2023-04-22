@@ -7,6 +7,7 @@ export default function BudgetCard({
     gray,
     hideButtons,
     onAddExpenseClick,
+    onViewExpensesClick,
 }) {
     const classNames = [];
     if (amount > max) classNames.push("bg-red-500/[0.25]");
@@ -46,7 +47,10 @@ export default function BudgetCard({
                     >
                         Add Expense
                     </button>
-                    <button className="border-gray-400 border-2 p-2 text-gray-500 rounded-md">
+                    <button
+                        className="border-gray-400 border-2 p-2 text-gray-500 rounded-md"
+                        onClick={onViewExpensesClick}
+                    >
                         View Expenses
                     </button>
                 </div>
