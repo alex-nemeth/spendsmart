@@ -19,20 +19,24 @@ export default function BudgetCard({
                 <div>{name}</div>
                 <div className="flex items-baseline">
                     {currencyFormatter.format(amount)}{" "}
-                    <span className="text-black/[0.6] text-xs ms-1">
-                        / {currencyFormatter.format(max)}
-                    </span>
+                    {max && (
+                        <span className="text-black/[0.6] text-xs ms-1">
+                            / {currencyFormatter.format(max)}
+                        </span>
+                    )}
                 </div>
             </div>
-            <div className="w-full h-6 bg-gray-100 rounded-full">
-                <div
-                    className={`h-6 ${getProgressBarColor(
-                        amount,
-                        max
-                    )} rounded-full`}
-                    style={{ width: getProgressBarRatio(amount, max) }}
-                ></div>
-            </div>
+            {max && (
+                <div className="w-full h-6 bg-gray-100 rounded-full">
+                    <div
+                        className={`h-6 ${getProgressBarColor(
+                            amount,
+                            max
+                        )} rounded-full`}
+                        style={{ width: getProgressBarRatio(amount, max) }}
+                    ></div>
+                </div>
+            )}
             <div className="flex gap-2 mt-4">
                 <button
                     className="border-blue-500 border-2 p-2 text-blue-500 rounded-md ms-auto"
