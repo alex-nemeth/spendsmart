@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
     UNCATEGORIZED_BUDGET_ID,
     useBudgets,
@@ -9,9 +9,10 @@ export default function AddExpenseModal({
     handleClose,
     defaultBudgetId,
 }) {
+    const [budget, setBudget] = useState(defaultBudgetId);
+
     const descriptionRef = useRef();
     const amountRef = useRef();
-    const budgetIdRef = useRef();
     const { addExpense, budgets } = useBudgets();
 
     function handleSubmit(e) {
@@ -19,10 +20,15 @@ export default function AddExpenseModal({
         addExpense({
             description: descriptionRef.current.value,
             amount: parseFloat(amountRef.current.value),
-            budgetId: budgetIdRef.current.value,
+            budgetId: budget,
         });
         handleClose();
     }
+
+    console.log(defaultBudgetId);
+    useEffect(() => {
+        setBudget(defaultBudgetId);
+    }, [defaultBudgetId]);
 
     return (
         <div
@@ -70,7 +76,6 @@ export default function AddExpenseModal({
                                     name="description"
                                     id="description"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    placeholder="Entertainment"
                                     ref={descriptionRef}
                                     required
                                 />
@@ -86,7 +91,6 @@ export default function AddExpenseModal({
                                     type="number"
                                     name="amount"
                                     id="amount"
-                                    placeholder="200"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                                     ref={amountRef}
                                     required
@@ -101,9 +105,9 @@ export default function AddExpenseModal({
                                     Budget
                                 </label>
                                 <select
-                                    defaultValue={defaultBudgetId}
                                     className="bg-gray-100 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    ref={budgetIdRef}
+                                    value={budget}
+                                    onChange={(e) => setBudget(e.target.value)}
                                     required
                                     step={0.01}
                                 >

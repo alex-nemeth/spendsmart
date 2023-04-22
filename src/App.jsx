@@ -19,6 +19,7 @@ function App() {
     function openAddExpenseModal(budgetId) {
         setShowAddExpenseModal(true);
         setAddExpenseModalBudgetId(budgetId);
+        console.log(budgetId);
     }
 
     return (
