@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
 import { nanoid } from "nanoid";
 
@@ -35,11 +35,15 @@ export const BudgetsProvider = ({ children }) => {
         });
     }
     function deleteBudget({ id }) {
+        console.log("deleted");
         setExpenses((prevExpenses) => {
             return prevExpenses.map((expense) => {
                 if (expense.budgetId !== id) return expense;
                 return { ...expense, budgetId: UNCATEGORIZED_BUDGET_ID };
             });
+        });
+        setBudgets((prevBudgets) => {
+            return prevBudgets.filter((budget) => budget.id !== id);
         });
     }
     function deleteExpense({ id }) {
