@@ -10,8 +10,9 @@ export default function BudgetCard({
     onViewExpensesClick,
 }) {
     const classNames = [];
-    if (amount > max) classNames.push("bg-red-500/[0.25]");
-    else if (gray) classNames.push("bg-gray-200/[0.2]");
+    if (amount > max) classNames.push("bg-red-200");
+    else if (gray) classNames.push("bg-brand-200");
+    else classNames.push("bg-brand-300");
 
     return (
         <div

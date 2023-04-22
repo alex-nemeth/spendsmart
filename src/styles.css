@@ -7,11 +7,15 @@
         background-color: theme("colors.white");
         border-radius: theme("borderRadius.lg");
         padding: theme("spacing.6");
-        box-shadow: theme("boxShadow.xl");
+        box-shadow: theme("boxShadow.2xl");
     }
 }
 
 body {
-    background-color: #052e16;
+    background-color: #0a4d68;
     color: white;
+}
+
+.modal {
+    background-color: #088395;
 }

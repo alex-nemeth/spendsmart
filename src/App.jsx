@@ -31,7 +31,7 @@ function App() {
                         className="w-40 me-auto mx-4 border-2"
                     />
                     <button
-                        className="border-2 w-32"
+                        className="border-2 w-32 "
                         onClick={() => setShowAddBudgetModal(true)}
                     >
                         Add Budget
