@@ -1,4 +1,5 @@
 import { useState } from "react";
+import BudgetCard from "./components/BudgetCard";
 
 function App() {
     return (
@@ -8,7 +9,9 @@ function App() {
                 <button className="border-2">Add Budget</button>
                 <button className="border-2">Add Expense</button>
             </div>
-            <div className="grid grid-cols-1 gap-1 items-start"></div>
+            <div className="grid grid-cols-1 gap-1 items-start">
+                <BudgetCard name="Entertainment" amount={200} max={300} />
+            </div>
         </div>
     );
 }
