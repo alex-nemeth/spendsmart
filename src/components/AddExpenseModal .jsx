@@ -104,6 +104,7 @@ export default function AddExpenseModal({
                                     ref={budgetIdRef}
                                     required
                                     step={0.01}
+                                >
                                     {budgets.map((budget) => (
                                         <option
                                             key={budget.id}
@@ -112,7 +113,7 @@ export default function AddExpenseModal({
                                             {budget.name}
                                         </option>
                                     ))}
-                                />
+                                </select>
                             </div>
                             <div className="flex justify-end">
                                 <button
