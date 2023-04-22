@@ -11,6 +11,7 @@ function App() {
             </div>
             <div className="grid grid-cols-1 gap-1 items-start">
                 <BudgetCard name="Entertainment" amount={200} max={300} />
+                <BudgetCard name="Gray" amount={100} max={300} gray />
             </div>
         </div>
     );
