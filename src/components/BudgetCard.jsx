@@ -11,31 +11,31 @@ export default function BudgetCard({
 }) {
     const classNames = [];
     if (amount > max) classNames.push("bg-red-200");
-    else if (gray) classNames.push("bg-brand-200");
-    else classNames.push("bg-brand-300");
+    else if (gray) classNames.push("bg-slate-200/[0.9]");
+    else classNames.push("bg-slate-50");
 
     return (
         <div
             className={`card flex flex-col text-black ${classNames.join(" ")}`}
         >
-            <div className="flex justify-between items-baseline font-normal mb-3">
+            <div className="flex justify-between items-baseline font-semibold text-xl mb-3">
                 <div>{name}</div>
-                <div className="flex items-baseline">
+                <div className="flex items-baseline text-xl">
                     {currencyFormatter.format(amount)}{" "}
                     {max && (
-                        <span className="text-black/[0.6] text-xs ms-1">
+                        <span className="text-black/[0.6] text-sm ms-1">
                             / {currencyFormatter.format(max)}
                         </span>
                     )}
                 </div>
             </div>
             {max && (
-                <div className="w-full h-6 bg-gray-100 rounded-full">
+                <div className="w-full h-6 bg-slate-200 rounded-lg">
                     <div
                         className={`h-6 ${getProgressBarColor(
                             amount,
                             max
-                        )} rounded-full transition-all duration-500`}
+                        )} rounded-lg transition-all duration-500`}
                         style={{ width: getProgressBarRatio(amount, max) }}
                     ></div>
                 </div>
@@ -43,13 +43,13 @@ export default function BudgetCard({
             {!hideButtons && (
                 <div className="flex gap-2 mt-4">
                     <button
-                        className="border-blue-500 border-2 p-2 text-blue-500 rounded-md ms-auto"
+                        className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-slate-200 font-semibold rounded-md ms-auto transition-all"
                         onClick={onAddExpenseClick}
                     >
                         Add Expense
                     </button>
                     <button
-                        className="border-gray-400 border-2 p-2 text-gray-500 rounded-md"
+                        className="border-slate-400 border-2 p-2 text-slate-400 hover:bg-slate-200 rounded-md transition-all"
                         onClick={onViewExpensesClick}
                     >
                         View Expenses
@@ -67,7 +67,7 @@ function getProgressBarRatio(amount, max) {
 
 function getProgressBarColor(amount, max) {
     const ratio = amount / max;
-    if (ratio < 0.5) return "bg-blue-600";
-    if (ratio < 0.75) return "bg-yellow-500";
+    if (ratio < 0.5) return "bg-sky-400";
+    if (ratio < 0.75) return "bg-yellow-300";
     return "bg-red-500";
 }

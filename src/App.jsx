@@ -25,25 +25,28 @@ function App() {
         <>
             <div className="my-4">
                 <div className="flex gap-2 mb-4">
-                    <img
+                    <h1 className="text-2xl border-2 p-2 text-center justify-center me-auto mx-4 hover:cursor-default">
+                        SpendSmart
+                    </h1>
+                    {/* <img
                         src="/images/logo.png"
                         alt="spendsmart logo"
                         className="w-40 me-auto mx-4 border-2"
-                    />
+                    /> */}
                     <button
-                        className="border-2 w-32 "
+                        className="border-2 w-32 text-lg hover:bg-cyan-700 transition-all"
                         onClick={() => setShowAddBudgetModal(true)}
                     >
                         Add Budget
                     </button>
                     <button
-                        className="border-2 mr-4 w-32"
+                        className="border-2 mr-4 w-32 text-lg hover:bg-sky-700 transition-all"
                         onClick={openAddExpenseModal}
                     >
                         Add Expense
                     </button>
                 </div>
-                <div className="grid grid-cols-1 gap-1 items-start mx-4">
+                <div className="grid grid-cols-1 gap-1 items-start mx-4 ">
                     {budgets.map((budget) => {
                         const amount = getBudgetExpenses(budget.id).reduce(
                             (total, expense) => total + expense.amount,
