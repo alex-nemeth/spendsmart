@@ -34,7 +34,7 @@ export default function BudgetCard({
                         className={`h-6 ${getProgressBarColor(
                             amount,
                             max
-                        )} rounded-full`}
+                        )} rounded-full transition-all duration-500`}
                         style={{ width: getProgressBarRatio(amount, max) }}
                     ></div>
                 </div>
