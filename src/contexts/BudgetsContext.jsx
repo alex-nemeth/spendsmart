@@ -27,11 +27,11 @@ export const BudgetsProvider = ({ children }) => {
         });
     }
 
-    function addBudget({ name, max }) {
+    function addBudget({ name, max, loan }) {
         setBudgets((prevBudgets) => {
             if (prevBudgets.find((budget) => budget.name === name))
                 return prevBudgets;
-            return [...prevBudgets, { id: nanoid(), name, max }];
+            return [...prevBudgets, { id: nanoid(), name, max, loan }];
         });
     }
     function deleteBudget({ id }) {

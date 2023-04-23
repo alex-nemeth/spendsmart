@@ -8,14 +8,17 @@ export default function BudgetCard({
     hideButtons,
     onAddExpenseClick,
     onViewExpensesClick,
+    loan,
 }) {
     const classNames = [];
-    if (amount > max) classNames.push("bg-red-200");
+    if (loan === "true" && amount >= max) classNames.push("bg-green-100");
+    if (amount >= max) classNames.push("bg-red-200");
     else if (gray) classNames.push("bg-slate-200/[0.9]");
     else classNames.push("bg-slate-50");
 
     return (
         <div
+            onClick={() => console.log(name, loan)}
             className={`card flex flex-col text-black ${classNames.join(" ")}`}
         >
             <div className="flex justify-between items-baseline font-semibold text-xl mb-3">
@@ -32,10 +35,11 @@ export default function BudgetCard({
             {max && (
                 <div className="w-full h-6 bg-slate-200 rounded-lg">
                     <div
-                        className={`h-6 ${getProgressBarColor(
-                            amount,
-                            max
-                        )} rounded-lg transition-all duration-500`}
+                        className={`h-6 ${
+                            loan === "true"
+                                ? getProgressBarColorLoan(amount, max)
+                                : getProgressBarColor(amount, max)
+                        } rounded-lg transition-all duration-500`}
                         style={{ width: getProgressBarRatio(amount, max) }}
                     ></div>
                 </div>
@@ -70,4 +74,11 @@ function getProgressBarColor(amount, max) {
     if (ratio < 0.5) return "bg-sky-400";
     if (ratio < 0.75) return "bg-yellow-300";
     return "bg-red-500";
+}
+
+function getProgressBarColorLoan(amount, max) {
+    const ratio = amount / max;
+    if (ratio < 0.5) return "bg-red-500";
+    if (ratio < 0.75) return "bg-yellow-300";
+    return "bg-green-400";
 }

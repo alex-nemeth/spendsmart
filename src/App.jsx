@@ -19,8 +19,14 @@ function App() {
     function openAddExpenseModal(budgetId) {
         setShowAddExpenseModal(true);
         setAddExpenseModalBudgetId(budgetId);
-        console.log(budgetId);
     }
+
+    console.log(
+        "Loans: " + budgets.filter((budget) => budget.loan === "true").length
+    );
+    console.log(
+        "Budgets: " + budgets.filter((budget) => budget.loan === "false").length
+    );
 
     return (
         <>
@@ -43,26 +49,58 @@ function App() {
                     </button>
                 </div>
                 <div className="grid grid-cols-1 gap-1 items-start mx-4 ">
-                    {budgets.map((budget) => {
-                        const amount = getBudgetExpenses(budget.id).reduce(
-                            (total, expense) => total + expense.amount,
-                            0
-                        );
-                        return (
-                            <BudgetCard
-                                key={budget.id}
-                                name={budget.name}
-                                amount={amount}
-                                max={budget.max}
-                                onAddExpenseClick={() =>
-                                    openAddExpenseModal(budget.id)
-                                }
-                                onViewExpensesClick={() =>
-                                    setViewExpensesModalBudgetId(budget.id)
-                                }
-                            />
-                        );
-                    })}
+                    {budgets.filter((budget) => budget.loan === "false")
+                        .length > 0 && (
+                        <h1 className="text-2xl font-semibold">Budgets</h1>
+                    )}
+                    {budgets
+                        .filter((budget) => budget.loan === "false")
+                        .map((budget) => {
+                            const amount = getBudgetExpenses(budget.id).reduce(
+                                (total, expense) => total + expense.amount,
+                                0
+                            );
+                            return (
+                                <BudgetCard
+                                    key={budget.id}
+                                    name={budget.name}
+                                    amount={amount}
+                                    max={budget.max}
+                                    loan={budget.loan}
+                                    onAddExpenseClick={() =>
+                                        openAddExpenseModal(budget.id)
+                                    }
+                                    onViewExpensesClick={() =>
+                                        setViewExpensesModalBudgetId(budget.id)
+                                    }
+                                />
+                            );
+                        })}
+                    {budgets.filter((budget) => budget.loan === "true").length >
+                        0 && <h1 className="text-2xl font-semibold">Loans</h1>}
+                    {budgets
+                        .filter((budget) => budget.loan === "true")
+                        .map((budget) => {
+                            const amount = getBudgetExpenses(budget.id).reduce(
+                                (total, expense) => total + expense.amount,
+                                0
+                            );
+                            return (
+                                <BudgetCard
+                                    key={budget.id}
+                                    name={budget.name}
+                                    amount={amount}
+                                    max={budget.max}
+                                    loan={budget.loan}
+                                    onAddExpenseClick={() =>
+                                        openAddExpenseModal(budget.id)
+                                    }
+                                    onViewExpensesClick={() =>
+                                        setViewExpensesModalBudgetId(budget.id)
+                                    }
+                                />
+                            );
+                        })}
                     <UncategorizedBudgetCard
                         onAddExpenseClick={openAddExpenseModal}
                         onViewExpensesClick={() =>
