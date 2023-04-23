@@ -21,13 +21,6 @@ function App() {
         setAddExpenseModalBudgetId(budgetId);
     }
 
-    console.log(
-        "Loans: " + budgets.filter((budget) => budget.loan === "true").length
-    );
-    console.log(
-        "Budgets: " + budgets.filter((budget) => budget.loan === "false").length
-    );
-
     return (
         <>
             <div className="my-4">
@@ -85,7 +78,7 @@ function App() {
                         (budget) =>
                             budget.loan === "true" || budget.loan === true
                     ).length > 0 && (
-                        <h1 className="text-2xl font-semibold">Loans</h1>
+                        <h1 className="text-2xl font-semibold mt-4">Loans</h1>
                     )}
                     {budgets
                         .filter(
