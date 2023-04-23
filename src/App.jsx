@@ -13,7 +13,7 @@ import AddBudgetModal from "./components/AddBudgetModal";
 import AddExpenseModal from "./components/AddExpenseModal ";
 import ViewExpensesModal from "./components/ViewExpensesModal";
 
-function App() {
+export default function App() {
     const [showAddBudgetModal, setShowAddBudgetModal] = useState(false);
     const [showAddExpenseModal, setShowAddExpenseModal] = useState(false);
     const [viewExpensesModalBudgetId, setViewExpensesModalBudgetId] =
@@ -27,6 +27,13 @@ function App() {
         setAddExpenseModalBudgetId(budgetId);
     }
 
+    const budgetCardsCheck =
+        budgets.filter((b) => b.loan === "false" || b.loan === false).length >
+        0;
+
+    const loanCardsCheck =
+        budgets.filter((b) => b.loan === "true" || b.loan === true).length > 0;
+
     return (
         <>
             <div className="my-4">
@@ -35,10 +42,7 @@ function App() {
                     onExpenseClick={() => openAddExpenseModal}
                 />
                 <div className="grid grid-cols-1 gap-1 items-start mx-4 ">
-                    {budgets.filter(
-                        (budget) =>
-                            budget.loan === "false" || budget.loan === false
-                    ).length > 0 && (
+                    {budgetCardsCheck && (
                         <h1 className="text-2xl font-semibold">Budgets</h1>
                     )}
                     {budgets
@@ -67,10 +71,7 @@ function App() {
                                 />
                             );
                         })}
-                    {budgets.filter(
-                        (budget) =>
-                            budget.loan === "true" || budget.loan === true
-                    ).length > 0 && (
+                    {loanCardsCheck && (
                         <h1 className="text-2xl font-semibold mt-4">Loans</h1>
                     )}
                     {budgets
@@ -127,5 +128,3 @@ function App() {
         </>
     );
 }
-
-export default App;
