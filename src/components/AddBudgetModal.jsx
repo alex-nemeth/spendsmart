@@ -4,13 +4,15 @@ import { useBudgets } from "../contexts/BudgetsContext";
 export default function AddBudgetModal({ show, handleClose }) {
     const nameRef = useRef();
     const maxRef = useRef();
-    const { addBudget } = useBudgets();
+    const loanRef = useRef();
+    const { addBudget, budgets } = useBudgets();
 
     function handleSubmit(e) {
         e.preventDefault();
         addBudget({
             name: nameRef.current.value,
             max: parseFloat(maxRef.current.value),
+            loan: loanRef.current.value,
         });
         handleClose();
     }
@@ -82,6 +84,19 @@ export default function AddBudgetModal({ show, handleClose }) {
                                     required
                                     step={0.01}
                                 />
+
+                                <div className="flex text-gray-900 py-4 gap-4">
+                                    <select
+                                        className="bg-gray-100 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                        name="loan"
+                                        id="loan"
+                                        ref={loanRef}
+                                        required
+                                    >
+                                        <option value={false}>Budget</option>
+                                        <option value={true}>Loan</option>
+                                    </select>
+                                </div>
                             </div>
                             <div className="flex justify-end">
                                 <button

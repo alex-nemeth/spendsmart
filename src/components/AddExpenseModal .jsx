@@ -25,7 +25,6 @@ export default function AddExpenseModal({
         handleClose();
     }
 
-    console.log(defaultBudgetId);
     useEffect(() => {
         setBudget(defaultBudgetId);
     }, [defaultBudgetId]);
