@@ -1,4 +1,5 @@
 import { currencyFormatter } from "../utils";
+import { useBudgets } from "../contexts/BudgetsContext";
 
 export default function BudgetCard({
     name,
@@ -9,7 +10,11 @@ export default function BudgetCard({
     onAddExpenseClick,
     onViewExpensesClick,
     loan,
+    id,
 }) {
+    const { budgets, deleteBudget } = useBudgets();
+    const budget = budgets.find((budget) => budget.id === id);
+
     const classNames = [];
     if (loan === "true" && amount >= max) classNames.push("bg-green-100");
     else if (amount >= max) classNames.push("bg-red-200");
@@ -46,6 +51,14 @@ export default function BudgetCard({
             )}
             {!hideButtons && (
                 <div className="flex gap-2 mt-4">
+                    {loan === "true" && amount >= max && (
+                        <button
+                            className="p-2 text-white bg-green-500 hover:bg-green-600 font-semibold rounded-md me-auto transition-all"
+                            onClick={() => deleteBudget(budget)}
+                        >
+                            Clear Loan
+                        </button>
+                    )}
                     <button
                         className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-slate-200 font-semibold rounded-md ms-auto transition-all"
                         onClick={onAddExpenseClick}

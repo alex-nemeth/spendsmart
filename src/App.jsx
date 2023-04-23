@@ -62,6 +62,7 @@ export default function App() {
                                     amount={amount}
                                     max={budget.max}
                                     loan={budget.loan}
+                                    id={budget.id}
                                     onAddExpenseClick={() =>
                                         openAddExpenseModal(budget.id)
                                     }
@@ -91,6 +92,7 @@ export default function App() {
                                     amount={amount}
                                     max={budget.max}
                                     loan={budget.loan}
+                                    id={budget.id}
                                     onAddExpenseClick={() =>
                                         openAddExpenseModal(budget.id)
                                     }
