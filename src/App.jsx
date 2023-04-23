@@ -23,6 +23,7 @@ export default function App() {
     const { budgets, getBudgetExpenses } = useBudgets();
 
     function openAddExpenseModal(budgetId) {
+        console.log("modal opened");
         setShowAddExpenseModal(true);
         setAddExpenseModalBudgetId(budgetId);
     }
@@ -36,15 +37,17 @@ export default function App() {
 
     return (
         <>
-            <div className="my-4">
+            <div className="my-4 m-auto items-center md:w-4/5 lg:w-3/5">
                 <Header
                     onTrackerClick={() => setShowAddBudgetModal(true)}
-                    onExpenseClick={() => openAddExpenseModal}
+                    onExpenseClick={() => setShowAddExpenseModal(true)}
                 />
-                <div className="grid grid-cols-1 gap-1 items-start mx-4 ">
-                    {budgetCardsCheck && (
-                        <h1 className="text-2xl font-semibold">Budgets</h1>
-                    )}
+                {budgetCardsCheck && (
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mx-4 my-2">
+                        Budgets
+                    </h1>
+                )}
+                <div className="grid grid-cols-1 gap-1 items-start mx-4 lg:grid-cols-2  md:gap-2 lg:gap-4 ">
                     {budgets
                         .filter(
                             (budget) =>
@@ -72,9 +75,13 @@ export default function App() {
                                 />
                             );
                         })}
-                    {loanCardsCheck && (
-                        <h1 className="text-2xl font-semibold mt-4">Loans</h1>
-                    )}
+                </div>
+                {loanCardsCheck && (
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mt-4  mx-4 my-2">
+                        Loans
+                    </h1>
+                )}
+                <div className="grid grid-cols-1 gap-1 items-start mx-4 lg:grid-cols-2 md:gap-2 lg:gap-4 ">
                     {budgets
                         .filter(
                             (budget) =>
@@ -102,7 +109,8 @@ export default function App() {
                                 />
                             );
                         })}
-                    <div className="h-4"></div>
+                </div>
+                <div className="mx-4 mt-6 md:mt-8 lg:mt-10">
                     <UncategorizedBudgetCard
                         onAddExpenseClick={openAddExpenseModal}
                         onViewExpensesClick={() =>

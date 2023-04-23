@@ -24,14 +24,16 @@ export default function BudgetCard({
     return (
         <div
             onClick={() => console.log(name, loan)}
-            className={`card flex flex-col text-black ${classNames.join(" ")}`}
+            className={`card flex flex-col text-black ${classNames.join(" ")} `}
         >
             <div className="flex justify-between items-baseline font-semibold text-xl mb-3">
-                <div>{name}</div>
-                <div className="flex items-baseline text-xl">
+                <div className="text-inherit md:text-2xl lg:text-3xl ">
+                    {name}
+                </div>
+                <div className="flex items-baseline text-xl md:text-2xl lg:text-3xl ">
                     {currencyFormatter.format(amount)}{" "}
                     {max && (
-                        <span className="text-black/[0.6] text-sm ms-1">
+                        <span className="text-black/[0.6] text-sm md:text-lg lg:text-xl ms-1">
                             / {currencyFormatter.format(max)}
                         </span>
                     )}
@@ -60,7 +62,7 @@ export default function BudgetCard({
                         </button>
                     )}
                     <button
-                        className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-slate-200 font-semibold rounded-md ms-auto transition-all"
+                        className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-cyan-200 font-semibold rounded-md ms-auto transition-all"
                         onClick={onAddExpenseClick}
                     >
                         Add Expense
