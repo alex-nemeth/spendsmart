@@ -23,10 +23,10 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
             } fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
         >
             <div className="relative w-full max-w-md max-h-full">
-                <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div className="relative bg-white text-gray-900 rounded-lg shadow">
                     <button
                         type="button"
-                        className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-800 dark:hover:text-white"
+                        className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
                         data-modal-hide="authentication-modal"
                         onClick={handleClose}
                     >
@@ -46,12 +46,12 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                         <span className="sr-only">Close modal</span>
                     </button>
                     <div className="px-6 py-6 lg:px-8">
-                        <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
+                        <h3 className="mb-4 text-xl font-medium text-gray-500">
                             <div className="flex justify-between mx-6 gap-2">
-                                <div>Expenses - {budget?.name}</div>
+                                <div>{budget?.name}</div>
                                 {budgetId !== UNCATEGORIZED_BUDGET_ID && (
                                     <button
-                                        className="border-2 p-1 text-sm"
+                                        className="border-2 p-1 text-sm border-red-400 text-red-400 rounded-lg hover:bg-red-200 transition-all"
                                         onClick={() => {
                                             deleteBudget(budget);
                                             handleClose();
@@ -65,14 +65,20 @@ export default function ViewExpensesModal({ budgetId, handleClose }) {
                     </div>
                     <div className="flex flex-col gap-3">
                         {expenses.map((expense) => (
-                            <div className="flex gap-2" key={expense.id}>
-                                <div className="me-auto text-sm">
+                            <div
+                                className="flex gap-2 items-center me-6"
+                                key={expense.id}
+                            >
+                                <div className="me-auto text-md mx-8 mb-4">
                                     {expense.description}
                                 </div>
-                                <div className="text-md">
+                                <div className="text-lg font-semibold">
                                     {currencyFormatter.format(expense.amount)}
                                 </div>
-                                <button onClick={() => deleteExpense(expense)}>
+                                <button
+                                    className="hover:bg-gray-200 p-1 rounded-md"
+                                    onClick={() => deleteExpense(expense)}
+                                >
                                     {" "}
                                     <svg
                                         aria-hidden="true"

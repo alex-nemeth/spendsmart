@@ -29,11 +29,6 @@ function App() {
                     <h1 className="text-2xl border-2 p-2 text-center justify-center me-auto mx-4 hover:cursor-default">
                         SpendSmart
                     </h1>
-                    {/* <img
-                        src="/images/logo.png"
-                        alt="spendsmart logo"
-                        className="w-40 me-auto mx-4 border-2"
-                    /> */}
                     <button
                         className="border-2 w-32 text-lg hover:bg-cyan-700 transition-all"
                         onClick={() => setShowAddBudgetModal(true)}
