@@ -11,13 +11,14 @@ export default function BudgetCard({
     loan,
 }) {
     const classNames = [];
-    if (loan && amount >= max) classNames.push("bg-green-100");
+    if (loan === "true" && amount >= max) classNames.push("bg-green-100");
     if (amount >= max) classNames.push("bg-red-200");
     else if (gray) classNames.push("bg-slate-200/[0.9]");
     else classNames.push("bg-slate-50");
 
     return (
         <div
+            onClick={() => console.log(name, loan)}
             className={`card flex flex-col text-black ${classNames.join(" ")}`}
         >
             <div className="flex justify-between items-baseline font-semibold text-xl mb-3">
@@ -35,7 +36,7 @@ export default function BudgetCard({
                 <div className="w-full h-6 bg-slate-200 rounded-lg">
                     <div
                         className={`h-6 ${
-                            loan
+                            loan === "true"
                                 ? getProgressBarColorLoan(amount, max)
                                 : getProgressBarColor(amount, max)
                         } rounded-lg transition-all duration-500`}

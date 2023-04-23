@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState, useRef } from "react";
 import { useBudgets } from "../contexts/BudgetsContext";
 
 export default function AddBudgetModal({ show, handleClose }) {
@@ -6,13 +6,14 @@ export default function AddBudgetModal({ show, handleClose }) {
     const maxRef = useRef();
     const loanRef = useRef();
     const { addBudget, budgets } = useBudgets();
+    const [loan, setLoan] = useState(false);
 
     function handleSubmit(e) {
         e.preventDefault();
         addBudget({
             name: nameRef.current.value,
             max: parseFloat(maxRef.current.value),
-            loan: loanRef.current.value,
+            loan: loan,
         });
         handleClose();
     }
@@ -90,7 +91,10 @@ export default function AddBudgetModal({ show, handleClose }) {
                                         className="bg-gray-100 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                                         name="loan"
                                         id="loan"
-                                        ref={loanRef}
+                                        onChange={(e) => {
+                                            setLoan(e.target.value);
+                                            console.log(loan);
+                                        }}
                                         required
                                     >
                                         <option value={false}>Budget</option>
