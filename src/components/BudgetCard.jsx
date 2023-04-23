@@ -55,20 +55,20 @@ export default function BudgetCard({
                 <div className="flex gap-2 mt-4">
                     {loan === "true" && amount >= max && (
                         <button
-                            className="p-2 text-white bg-green-500 hover:bg-green-600 font-semibold rounded-md me-auto transition-all"
+                            className="p-2 text-white bg-green-500 hover:bg-green-600 font-semibold rounded-md me-auto transition-all xl:text-lg"
                             onClick={() => deleteBudget(budget)}
                         >
                             Clear Loan
                         </button>
                     )}
                     <button
-                        className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-cyan-200 font-semibold rounded-md ms-auto transition-all"
+                        className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-cyan-200 font-semibold rounded-md ms-auto transition-all xl:text-lg"
                         onClick={onAddExpenseClick}
                     >
                         Add Expense
                     </button>
                     <button
-                        className="border-slate-400 border-2 p-2 text-slate-400 hover:bg-slate-200 rounded-md transition-all"
+                        className="border-slate-400 border-2 p-2 text-slate-400 hover:bg-slate-200 rounded-md transition-all xl:text-lg"
                         onClick={onViewExpensesClick}
                     >
                         View Expenses

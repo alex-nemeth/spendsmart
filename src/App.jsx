@@ -37,13 +37,13 @@ export default function App() {
 
     return (
         <>
-            <div className="my-4 m-auto items-center md:w-4/5 lg:w-3/5">
+            <div className="my-4 m-auto items-center md:w-10/12 xl:w-8/12">
                 <Header
                     onTrackerClick={() => setShowAddBudgetModal(true)}
                     onExpenseClick={() => setShowAddExpenseModal(true)}
                 />
                 {budgetCardsCheck && (
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mx-4 my-2">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl mt-4 md:mt-6 lg:mt-8 font-semibold mx-4 my-2">
                         Budgets
                     </h1>
                 )}
@@ -77,7 +77,7 @@ export default function App() {
                         })}
                 </div>
                 {loanCardsCheck && (
-                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mt-4  mx-4 my-2">
+                    <h1 className="text-2xl md:text-3xl lg:text-4xl font-semibold mt-4 md:mt-6 lg:mt-8  mx-4 my-2">
                         Loans
                     </h1>
                 )}
@@ -119,6 +119,8 @@ export default function App() {
                             )
                         }
                     />
+                </div>
+                <div className="mx-4 mt-2 sm:mt-3 md:mt-4 lg:mt-5">
                     <TotalBudgetCard />
                 </div>
             </div>
