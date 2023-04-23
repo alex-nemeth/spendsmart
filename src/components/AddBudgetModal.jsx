@@ -4,7 +4,6 @@ import { useBudgets } from "../contexts/BudgetsContext";
 export default function AddBudgetModal({ show, handleClose }) {
     const nameRef = useRef();
     const maxRef = useRef();
-    const loanRef = useRef();
     const { addBudget, budgets } = useBudgets();
     const [loan, setLoan] = useState(false);
 
@@ -22,9 +21,9 @@ export default function AddBudgetModal({ show, handleClose }) {
         <div
             className={`${
                 show ? "visible" : "hidden"
-            }  fixed top-0 left-0 right-0 z-50  w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full`}
+            }  fixed top-0 left-0 right-0 z-50 w-full p-4 md:p-5 lg:p-6 overflow-x-hidden overflow-y-auto md:inset-0 h-full max-h-full bg-slate-700/[0.6]`}
         >
-            <div className=" modal relative w-full max-w-md max-h-full">
+            <div className="modal relative m-auto w-full max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl max-h-full">
                 <div className="relative bg-white rounded-lg shadow-2xl">
                     <button
                         type="button"
@@ -47,14 +46,14 @@ export default function AddBudgetModal({ show, handleClose }) {
                         <span className="sr-only">Close modal</span>
                     </button>
                     <div className="px-6 py-6 lg:px-8">
-                        <h3 className="mb-4 text-xl font-medium text-gray-500 ">
+                        <h3 className="mb-4 text-xl md:text-2xl lg:text-3xl font-medium text-gray-500 ">
                             New Tracker
                         </h3>
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div>
                                 <label
                                     htmlFor="name"
-                                    className="block mb-2 text-sm font-medium text-gray-600"
+                                    className="block mb-2 text-sm sm:text-md md:text-lg lg:text-xl font-medium text-gray-600"
                                 >
                                     Name
                                 </label>
@@ -62,7 +61,7 @@ export default function AddBudgetModal({ show, handleClose }) {
                                     type="text"
                                     name="name"
                                     id="name"
-                                    className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    className="bg-gray-100 border border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
                                     placeholder="Entertainment"
                                     ref={nameRef}
                                     required
@@ -71,7 +70,7 @@ export default function AddBudgetModal({ show, handleClose }) {
                             <div>
                                 <label
                                     htmlFor="max"
-                                    className="block mb-2 text-sm font-medium text-gray-900"
+                                    className="block mb-2 text-sm sm:text-md md:text-lg lg:text-xl font-medium text-gray-900"
                                 >
                                     Maximum Spending
                                 </label>
@@ -80,32 +79,37 @@ export default function AddBudgetModal({ show, handleClose }) {
                                     name="max"
                                     id="max"
                                     placeholder="200"
-                                    className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    className="bg-gray-100 border border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
                                     ref={maxRef}
                                     required
                                     step={0.01}
                                 />
-
-                                <div className="flex text-gray-900 py-4 gap-4">
-                                    <select
-                                        className="bg-gray-100 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                        name="loan"
-                                        id="loan"
-                                        onChange={(e) => {
-                                            setLoan(e.target.value);
-                                            console.log(loan);
-                                        }}
-                                        required
-                                    >
-                                        <option value={false}>Budget</option>
-                                        <option value={true}>Loan</option>
-                                    </select>
-                                </div>
+                            </div>
+                            <div>
+                                <label
+                                    htmlFor="max"
+                                    className="block mb-2 text-sm sm:text-md md:text-lg lg:text-xl font-medium text-gray-900"
+                                >
+                                    Type
+                                </label>
+                                <select
+                                    className="bg-gray-100 border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
+                                    name="loan"
+                                    id="loan"
+                                    onChange={(e) => {
+                                        setLoan(e.target.value);
+                                        console.log(loan);
+                                    }}
+                                    required
+                                >
+                                    <option value={false}>Budget</option>
+                                    <option value={true}>Loan</option>
+                                </select>
                             </div>
                             <div className="flex justify-end">
                                 <button
                                     type="submit"
-                                    className="w-full text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                    className="w-full text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm sm:text-md md:text-lg lg:text-xl px-5 py-2.5 text-center"
                                 >
                                     Add {loan === "true" ? "Loan" : "Budget"}
                                 </button>
