@@ -49,12 +49,17 @@ function App() {
                     </button>
                 </div>
                 <div className="grid grid-cols-1 gap-1 items-start mx-4 ">
-                    {budgets.filter((budget) => budget.loan === "false")
-                        .length > 0 && (
+                    {budgets.filter(
+                        (budget) =>
+                            budget.loan === "false" || budget.loan === false
+                    ).length > 0 && (
                         <h1 className="text-2xl font-semibold">Budgets</h1>
                     )}
                     {budgets
-                        .filter((budget) => budget.loan === "false")
+                        .filter(
+                            (budget) =>
+                                budget.loan === "false" || budget.loan === false
+                        )
                         .map((budget) => {
                             const amount = getBudgetExpenses(budget.id).reduce(
                                 (total, expense) => total + expense.amount,
@@ -76,10 +81,17 @@ function App() {
                                 />
                             );
                         })}
-                    {budgets.filter((budget) => budget.loan === "true").length >
-                        0 && <h1 className="text-2xl font-semibold">Loans</h1>}
+                    {budgets.filter(
+                        (budget) =>
+                            budget.loan === "true" || budget.loan === true
+                    ).length > 0 && (
+                        <h1 className="text-2xl font-semibold">Loans</h1>
+                    )}
                     {budgets
-                        .filter((budget) => budget.loan === "true")
+                        .filter(
+                            (budget) =>
+                                budget.loan === "true" || budget.loan === true
+                        )
                         .map((budget) => {
                             const amount = getBudgetExpenses(budget.id).reduce(
                                 (total, expense) => total + expense.amount,
