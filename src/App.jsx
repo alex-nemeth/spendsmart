@@ -1,9 +1,15 @@
+// React & Contexts
 import { useState } from "react";
+import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "./contexts/BudgetsContext";
+
+// App Components
+import Header from "./components/Header";
 import BudgetCard from "./components/BudgetCard";
 import UncategorizedBudgetCard from "./components/UncategorizedBudgetCard";
 import TotalBudgetCard from "./components/TotalBudgetCard";
+
+// Modal Components
 import AddBudgetModal from "./components/AddBudgetModal";
-import { useBudgets, UNCATEGORIZED_BUDGET_ID } from "./contexts/BudgetsContext";
 import AddExpenseModal from "./components/AddExpenseModal ";
 import ViewExpensesModal from "./components/ViewExpensesModal";
 
@@ -24,23 +30,10 @@ function App() {
     return (
         <>
             <div className="my-4">
-                <div className="flex gap-2 mb-4">
-                    <h1 className="text-2xl border-2 p-2 text-center justify-center me-auto mx-4 hover:cursor-default">
-                        Spend<span className="font-semibold">Smart</span>
-                    </h1>
-                    <button
-                        className="border-2 w-32 text-lg hover:bg-cyan-700 transition-all"
-                        onClick={() => setShowAddBudgetModal(true)}
-                    >
-                        New Tracker
-                    </button>
-                    <button
-                        className="border-2 mr-4 w-32 text-lg hover:bg-sky-700 transition-all"
-                        onClick={openAddExpenseModal}
-                    >
-                        New Expense
-                    </button>
-                </div>
+                <Header
+                    onTrackerClick={() => setShowAddBudgetModal(true)}
+                    onExpenseClick={() => openAddExpenseModal}
+                />
                 <div className="grid grid-cols-1 gap-1 items-start mx-4 ">
                     {budgets.filter(
                         (budget) =>
