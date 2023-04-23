@@ -33,19 +33,19 @@ function App() {
             <div className="my-4">
                 <div className="flex gap-2 mb-4">
                     <h1 className="text-2xl border-2 p-2 text-center justify-center me-auto mx-4 hover:cursor-default">
-                        SpendSmart
+                        Spend<span className="font-semibold">Smart</span>
                     </h1>
                     <button
                         className="border-2 w-32 text-lg hover:bg-cyan-700 transition-all"
                         onClick={() => setShowAddBudgetModal(true)}
                     >
-                        Add Budget
+                        New Tracker
                     </button>
                     <button
                         className="border-2 mr-4 w-32 text-lg hover:bg-sky-700 transition-all"
                         onClick={openAddExpenseModal}
                     >
-                        Add Expense
+                        New Expense
                     </button>
                 </div>
                 <div className="grid grid-cols-1 gap-1 items-start mx-4 ">
@@ -101,6 +101,7 @@ function App() {
                                 />
                             );
                         })}
+                    <div className="h-4"></div>
                     <UncategorizedBudgetCard
                         onAddExpenseClick={openAddExpenseModal}
                         onViewExpensesClick={() =>

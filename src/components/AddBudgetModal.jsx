@@ -48,7 +48,7 @@ export default function AddBudgetModal({ show, handleClose }) {
                     </button>
                     <div className="px-6 py-6 lg:px-8">
                         <h3 className="mb-4 text-xl font-medium text-gray-500 ">
-                            New Budget
+                            New Tracker
                         </h3>
                         <form className="space-y-6" onSubmit={handleSubmit}>
                             <div>
@@ -107,7 +107,7 @@ export default function AddBudgetModal({ show, handleClose }) {
                                     type="submit"
                                     className="w-full text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                                 >
-                                    Add Budget
+                                    Add {loan === "true" ? "Loan" : "Budget"}
                                 </button>
                             </div>
                         </form>

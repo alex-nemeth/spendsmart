@@ -12,7 +12,7 @@ export default function BudgetCard({
 }) {
     const classNames = [];
     if (loan === "true" && amount >= max) classNames.push("bg-green-100");
-    if (amount >= max) classNames.push("bg-red-200");
+    else if (amount >= max) classNames.push("bg-red-200");
     else if (gray) classNames.push("bg-slate-200/[0.9]");
     else classNames.push("bg-slate-50");
 
