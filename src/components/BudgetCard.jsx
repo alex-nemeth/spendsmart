@@ -62,13 +62,13 @@ export default function BudgetCard({
                         </button>
                     )}
                     <button
-                        className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-cyan-200 font-semibold rounded-md ms-auto transition-all xl:text-lg"
+                        className="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-cyan-500 hover:text-white font-semibold rounded-md ms-auto transition-all xl:text-lg"
                         onClick={onAddExpenseClick}
                     >
                         Add Expense
                     </button>
                     <button
-                        className="border-slate-400 border-2 p-2 text-slate-400 hover:bg-slate-200 rounded-md transition-all xl:text-lg"
+                        className="border-slate-400 border-2 p-2 text-slate-400 hover:bg-slate-400 hover:text-white rounded-md transition-all xl:text-lg"
                         onClick={onViewExpensesClick}
                     >
                         View Expenses
