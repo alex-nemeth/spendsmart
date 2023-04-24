@@ -13,6 +13,12 @@ export default function TotalBudgetCard(props) {
     if (max === 0) return null;
 
     return (
-        <BudgetCard amount={amount} name="Total" gray max={max} hideButtons />
+        <BudgetCard
+            amount={amount}
+            name="Total Tracked"
+            gray
+            max={max}
+            hideButtons
+        />
     );
 }
