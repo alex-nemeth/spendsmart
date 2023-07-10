@@ -3,33 +3,33 @@
 @tailwind utilities;
 
 @layer components {
-    .card {
-        background-color: theme("colors.white");
-        border-radius: theme("borderRadius.lg");
-        padding: theme("spacing.6");
-        box-shadow: theme("boxShadow.2xl");
-    }
+  .card {
+    background-color: theme("colors.white");
+    border-radius: theme("borderRadius.lg");
+    padding: theme("spacing.6");
+    box-shadow: theme("boxShadow.2xl");
+  }
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #103d4d;
+  background: #103d4d;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #088395;
-    border-radius: 5px;
-    transition: all 0.5s ease-in-out;
+  background: #088395;
+  border-radius: 5px;
+  transition: all 0.5s ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #089db4;
+  background: #089db4;
 }
 
 body {
-    background-color: #164e63;
-    color: white;
+  background-color: #164e63;
+  color: white;
 }
