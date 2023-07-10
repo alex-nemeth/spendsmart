@@ -8,6 +8,9 @@ import { BudgetsService } from './services/budgets.service';
 import { AddBudgetModalComponent } from './add-budget-modal/add-budget-modal.component';
 import { FormsModule } from '@angular/forms';
 import { AddExpenseModalComponent } from './add-expense-modal/add-expense-modal.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,13 @@ import { AddExpenseModalComponent } from './add-expense-modal/add-expense-modal.
     AddBudgetModalComponent,
     AddExpenseModalComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
+  ],
   providers: [BudgetsService],
   bootstrap: [AppComponent],
 })

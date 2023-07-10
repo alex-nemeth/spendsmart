@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BudgetsService } from './services/budgets.service';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +9,16 @@ import { BudgetsService } from './services/budgets.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  constructor(private budgetsService: BudgetsService) {
-    this.budgetsService.budgets$.subscribe((budget) => {
-      this.budgets.push(budget);
-    });
+  firestore: Firestore = inject(Firestore);
+  budgets$: Observable<any[]>;
+
+  constructor() {
+    const collectionInstance = collection(this.firestore, 'budgets');
+    this.budgets$ = collectionData(collectionInstance);
   }
 
-  budgets: any[] = [];
-  addBudgetModal = false;
-  addExpenseModal = true;
+  addBudgetModal = true;
+  addExpenseModal = false;
 
   toggleAddBudgetModal(): void {
     this.addBudgetModal = !this.addBudgetModal;
