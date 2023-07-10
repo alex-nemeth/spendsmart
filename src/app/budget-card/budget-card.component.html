@@ -1,0 +1,40 @@
+<div [class]="colorClass()" class="card flex flex-col text-black">
+  <div class="flex justify-between items-baseline font-semibold text-xl mb-3">
+    <div class="text-inherit md:text-2xl lg:text-3xl">
+      {{ name }}
+    </div>
+    <div class="flex items-baseline text-xl md:text-2xl lg:text-3xl">
+      {{ amount | currency : "EUR" : "symbol" : "1.0-2" }}
+      <span
+        class="text-black/[0.6] text-sm md:text-lg lg:text-xl ms-1"
+        *ngIf="max != undefined"
+      >
+        / {{ max | currency : "EUR" : "symbol" : "1.0-2" }}
+      </span>
+    </div>
+  </div>
+  <div *ngIf="max != undefined" class="w-full h-6 bg-slate-200 rounded-lg">
+    <div
+      class="h-6 rounded-lg transition-all duration-500"
+      [ngClass]="getProgressBarColor"
+    ></div>
+  </div>
+  <div *ngIf="!hideButtons" class="flex gap-2 mt-4">
+    <button
+      *ngIf="loan && amount >= max"
+      class="p-2 text-white bg-green-500 hover:bg-green-600 font-semibold rounded-md me-auto transition-all xl:text-lg"
+      (click)="deleteBudget(id)"
+    ></button>
+    <button
+      class="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-cyan-500 hover:text-white font-semibold rounded-md ms-auto transition-all xl:text-lg"
+      (click)="openAddExpenseModal(id)"
+    >
+      Add Expense
+    </button>
+    <button
+      class="border-slate-400 border-2 p-2 text-slate-400 hover:bg-slate-400 hover:text-white rounded-md transition-all xl:text-lg"
+    >
+      View Expenses
+    </button>
+  </div>
+</div>
