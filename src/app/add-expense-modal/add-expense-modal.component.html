@@ -30,7 +30,7 @@
         >
           New Expense
         </h3>
-        <form class="space-y-6" (submit)="handleSubmit()">
+        <form #f="ngForm" class="space-y-6" (ngSubmit)="handleSubmit(f)">
           <div>
             <label
               for="title"
@@ -40,10 +40,10 @@
             <input
               type="text"
               name="title"
-              id="name"
+              id="title"
               class="bg-gray-100 border border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
               placeholder="Restaurant Bill"
-              [(ngModel)]="description"
+              ngModel
               required
             />
             <div>
@@ -59,7 +59,7 @@
                 id="max"
                 placeholder="200"
                 class="bg-gray-100 border border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
-                [(ngModel)]="amount"
+                ngModel
                 required
                 step="{0.01}"
               />
