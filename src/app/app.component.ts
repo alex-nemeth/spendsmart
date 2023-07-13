@@ -4,6 +4,7 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,18 +13,23 @@ import firebase from 'firebase/compat/app';
 })
 export class AppComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
-  budgets$: Observable<any[]>;
-
+  budgets$: Observable<any[]> | null;
   user!: firebase.User | null;
 
-  constructor(private auth: AngularFireAuth) {
-    const collectionInstance = collection(this.firestore, 'budgets');
-    this.budgets$ = collectionData(collectionInstance);
+  constructor(private auth: AngularFireAuth, private authService: AuthService) {
+    this.budgets$ = null;
   }
 
   ngOnInit(): void {
     this.auth.authState.subscribe((user) => {
-      this.user = user;
+      if (user) {
+        this.user = user;
+        const collectionInstance = collection(
+          this.firestore,
+          `users/${this.user.uid}/budgets`
+        );
+        this.budgets$ = collectionData(collectionInstance);
+      }
     });
   }
 
