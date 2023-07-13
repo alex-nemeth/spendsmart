@@ -1,6 +1,11 @@
 import { Component, EventEmitter, Output, NgModule } from '@angular/core';
 import { BudgetsService } from '../services/budgets.service';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  addDoc,
+  updateDoc,
+} from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IBudget } from 'src/shared/interfaces';
 import { v4 as uuidv4 } from 'uuid';
@@ -26,11 +31,10 @@ export class AddBudgetModalComponent {
           ...f.value,
           amount: 0,
           expenses: [],
-          id: uuidv4(),
         };
         addDoc(collectionInstance, newBudget)
-          .then(() => {
-            console.log('Budget saved successfully');
+          .then((doc) => {
+            console.log('Budget saved successfully: ' + doc.id);
             this.handleClose();
           })
           .catch((error) => {
