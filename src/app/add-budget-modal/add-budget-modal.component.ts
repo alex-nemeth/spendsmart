@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output, NgModule } from '@angular/core';
 import { BudgetsService } from '../services/budgets.service';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { IBudget } from 'src/shared/interfaces';
 
 @Component({
   selector: 'app-add-budget-modal',
@@ -20,7 +21,12 @@ export class AddBudgetModalComponent {
           this.firestore,
           `users/${uid}/budgets`
         );
-        const newBudget = { ...f.value, amount: 0 };
+        const newBudget: IBudget = {
+          ...f.value,
+          amount: 0,
+          id: uid,
+          expenses: [],
+        };
         addDoc(collectionInstance, newBudget)
           .then(() => {
             console.log('Budget saved successfully');

@@ -10,7 +10,7 @@ export class BudgetCardComponent {
   @Input()
   id: string = '';
   @Input()
-  name: string = 'Budget';
+  title: string = 'Budget';
   @Input()
   amount: number = 0;
   @Input()

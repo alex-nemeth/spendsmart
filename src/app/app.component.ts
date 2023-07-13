@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
         );
         this.budgets$ = collectionData(collectionInstance);
       }
+      this.budgets$?.subscribe((b) => console.log(b));
     });
   }
 

@@ -11,7 +11,8 @@
   >
     <app-budget-card
       *ngFor="let budget of budgets$ | async"
-      [name]="budget.title"
+      [id]="budget.id"
+      [title]="budget.title"
       [max]="budget.max"
     ></app-budget-card>
   </div>
