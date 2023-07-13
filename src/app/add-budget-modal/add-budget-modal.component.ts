@@ -5,6 +5,7 @@ import {
   collection,
   addDoc,
   updateDoc,
+  doc,
 } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IBudget } from 'src/shared/interfaces';
@@ -34,7 +35,8 @@ export class AddBudgetModalComponent {
         };
         addDoc(collectionInstance, newBudget)
           .then((doc) => {
-            console.log('Budget saved successfully: ' + doc.id);
+            console.log('New Budget Created! ID: ' + doc.id);
+            updateDoc(doc, { id: doc.id });
             this.handleClose();
           })
           .catch((error) => {
