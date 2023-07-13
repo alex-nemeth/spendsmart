@@ -9,12 +9,12 @@ import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   budgets$: Observable<any[]> | null;
   user!: firebase.User | null;
+  currentBudgetId: string = '';
 
   constructor(private auth: AngularFireAuth, private authService: AuthService) {
     this.budgets$ = null;
@@ -41,7 +41,13 @@ export class AppComponent implements OnInit {
     this.addBudgetModal = !this.addBudgetModal;
   }
 
-  toggleAddExpenseModal(): void {
-    this.addExpenseModal = !this.addExpenseModal;
+  openAddExpenseModal(budgetId: string): void {
+    console.log('click');
+    this.currentBudgetId = budgetId;
+    this.addExpenseModal = true;
+  }
+
+  closeAddExpenseModal(): void {
+    this.addExpenseModal = false;
   }
 }

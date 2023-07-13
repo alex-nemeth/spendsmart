@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BudgetsService } from '../services/budgets.service';
 
 @Component({
@@ -20,14 +20,18 @@ export class BudgetCardComponent {
   @Input()
   hideButtons: boolean = false;
 
-  showAddExpenseModal = false;
+  @Output() addExpenseClick = new EventEmitter<void>();
+
+  onAddExpenseClick() {
+    this.addExpenseClick.emit();
+  }
 
   deleteBudget(id: string) {
     return this.budgetsService.deleteBudget(id);
   }
 
-  openAddExpenseModal(id: string) {
-    this.showAddExpenseModal = true;
+  logId(): void {
+    console.log(this.id);
   }
 
   colorClass(): string {

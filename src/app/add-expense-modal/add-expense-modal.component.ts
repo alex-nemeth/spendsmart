@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BudgetsService } from '../services/budgets.service';
 
 @Component({
@@ -7,10 +7,9 @@ import { BudgetsService } from '../services/budgets.service';
 })
 export class AddExpenseModalComponent {
   constructor(private budgetsService: BudgetsService) {}
-
+  @Input() id: string = '';
   description: string = '';
   amount: number = 0;
-  id: string = '';
 
   @Output() closeModal = new EventEmitter<void>();
 

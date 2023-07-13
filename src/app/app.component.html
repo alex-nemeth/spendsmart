@@ -14,6 +14,7 @@
       [id]="budget.id"
       [title]="budget.title"
       [max]="budget.max"
+      (addExpenseClick)="openAddExpenseModal(budget.id)"
     ></app-budget-card>
   </div>
 </div>
@@ -25,5 +26,6 @@
 
 <app-add-expense-modal
   *ngIf="addExpenseModal"
-  (closeModal)="toggleAddExpenseModal()"
+  [id]="currentBudgetId"
+  (closeModal)="closeAddExpenseModal()"
 ></app-add-expense-modal>

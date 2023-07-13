@@ -3,6 +3,7 @@ import { BudgetsService } from '../services/budgets.service';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { IBudget } from 'src/shared/interfaces';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-add-budget-modal',
@@ -24,8 +25,8 @@ export class AddBudgetModalComponent {
         const newBudget: IBudget = {
           ...f.value,
           amount: 0,
-          id: uid,
           expenses: [],
+          id: uuidv4(),
         };
         addDoc(collectionInstance, newBudget)
           .then(() => {
