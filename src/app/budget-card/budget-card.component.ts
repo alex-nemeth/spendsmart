@@ -35,22 +35,22 @@ export class BudgetCardComponent {
     else return 'bg-slate-50';
   }
 
-  getProgressBarRatio(amount: number, max: number): string {
-    if (amount > max) return '100%';
-    else return (amount / max) * 100 + '%';
+  getProgressBarRatio(): string {
+    if (this.amount > this.max) return '100%';
+    else return (this.amount / this.max) * 100 + '%';
   }
 
-  getProgressBarColor(amount: number, max: number): string {
-    const ratio = amount / max;
+  getProgressBarColor(): string {
+    const ratio = this.amount / this.max;
     if (ratio < 0.5) return 'bg-sky-400';
     if (ratio < 0.75) return 'bg-yellow-300';
     return 'bg-red-500';
   }
 
-  getProgressBarColorLoan(amount: number, max: number): string {
-    const ratio = amount / max;
-    if (ratio < 0.5) return 'bg-red-500';
-    if (ratio < 0.75) return 'bg-yellow-300';
-    return 'bg-green-400';
-  }
+  // getProgressBarColorLoan(): string {
+  //   const ratio = amount / max;
+  //   if (ratio < 0.5) return 'bg-red-500';
+  //   if (ratio < 0.75) return 'bg-yellow-300';
+  //   return 'bg-green-400';
+  // }
 }

@@ -13,10 +13,11 @@
       </span>
     </div>
   </div>
-  <div *ngIf="max != undefined" class="w-full h-6 bg-slate-200 rounded-lg">
+  <div *ngIf="max" class="w-full h-6 bg-slate-200 rounded-lg">
     <div
-      class="h-6 rounded-lg transition-all duration-500"
-      [ngClass]="getProgressBarColor"
+      class="h-6 rounded-lg transition-all duration-1000"
+      [ngClass]="getProgressBarColor()"
+      [style.width]="getProgressBarRatio()"
     ></div>
   </div>
   <div *ngIf="!hideButtons" class="flex gap-2 mt-4">

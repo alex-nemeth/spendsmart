@@ -32,9 +32,8 @@ export class AddExpenseModalComponent {
         const uid = user.uid;
         const docInstance = doc(
           this.firestore,
-          `users/${uid}/budgets/${this.id}`
+          `users/${user.uid}/budgets/${this.id}`
         );
-        console.log('UserID: ' + uid + 'Budget ID: ' + this.id + f.value);
         const newExpense: Object = {
           id: uuid(),
           date: dayjs().format('DD.MM.YYYY'),
@@ -43,7 +42,7 @@ export class AddExpenseModalComponent {
         updateDoc(docInstance, {
           expenses: arrayUnion(newExpense),
         })
-          .then((doc) => {
+          .then(() => {
             console.log('Expense Added! ' + JSON.stringify(newExpense));
           })
           .catch((error) => console.error(error));
