@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BudgetsService } from '../services/budgets.service';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import {
   Firestore,
@@ -9,20 +8,16 @@ import {
   arrayUnion,
 } from '@angular/fire/firestore';
 import { IExpense } from 'src/shared/interfaces';
+import * as dayjs from 'dayjs';
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-add-expense-modal',
   templateUrl: './add-expense-modal.component.html',
 })
 export class AddExpenseModalComponent {
-  constructor(
-    private budgetsService: BudgetsService,
-    private auth: AngularFireAuth,
-    private firestore: Firestore
-  ) {}
+  constructor(private auth: AngularFireAuth, private firestore: Firestore) {}
   @Input() id: string = '';
-  description: string = '';
-  amount: number = 0;
 
   @Output() closeModal = new EventEmitter<void>();
 
@@ -31,7 +26,7 @@ export class AddExpenseModalComponent {
   }
 
   handleSubmit(f: any) {
-    console.log(f.value);
+    const formValue = f.value;
     this.auth.authState.subscribe((user) => {
       if (user) {
         const uid = user.uid;
@@ -40,13 +35,17 @@ export class AddExpenseModalComponent {
           `users/${uid}/budgets/${this.id}`
         );
         console.log('UserID: ' + uid + 'Budget ID: ' + this.id + f.value);
-        const newExpense = {
-          ...f.value,
+        const newExpense: Object = {
+          id: uuid(),
+          date: dayjs().format('DD.MM.YYYY'),
+          ...formValue,
         };
         updateDoc(docInstance, {
           expenses: arrayUnion(newExpense),
         })
-          .then(() => console.log('Expense Added!'))
+          .then((doc) => {
+            console.log('Expense Added! ' + JSON.stringify(newExpense));
+          })
           .catch((error) => console.error(error));
       }
     });

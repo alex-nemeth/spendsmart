@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { AuthService } from './services/auth.service';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-root',

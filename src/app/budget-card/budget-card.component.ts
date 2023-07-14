@@ -30,10 +30,6 @@ export class BudgetCardComponent {
     return this.budgetsService.deleteBudget(id);
   }
 
-  logId(): void {
-    console.log(this.id);
-  }
-
   colorClass(): string {
     if (this.amount >= this.max) return 'bg-red-200';
     else return 'bg-slate-50';

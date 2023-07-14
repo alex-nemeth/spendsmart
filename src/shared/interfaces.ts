@@ -8,6 +8,7 @@ export interface IBudget {
 
 export interface IExpense {
   id: string;
+  date: string;
   title: string;
   amount: number;
 }
