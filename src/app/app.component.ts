@@ -6,6 +6,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
 import { AuthService } from './services/auth.service';
 import * as dayjs from 'dayjs';
+import { IBudget } from 'src/shared/interfaces';
 
 @Component({
   selector: 'app-root',
@@ -33,6 +34,10 @@ export class AppComponent implements OnInit {
       }
       this.budgets$?.subscribe((b) => console.log(b));
     });
+  }
+
+  totalAmount(budget: IBudget): number {
+    return budget.expenses.reduce((a, b) => a + b.amount, 0);
   }
 
   addBudgetModal = false;

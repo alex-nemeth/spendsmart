@@ -12,6 +12,7 @@
     <app-budget-card
       *ngFor="let budget of budgets$ | async"
       [id]="budget.id"
+      [amount]="totalAmount(budget)"
       [title]="budget.title"
       [max]="budget.max"
       (addExpenseClick)="openAddExpenseModal(budget.id)"
