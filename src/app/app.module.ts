@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ViewExpensesModalComponent } from './view-expenses-modal/view-expenses-modal.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AddBudgetModalComponent,
     AddExpenseModalComponent,
     LoginComponent,
+    ViewExpensesModalComponent,
   ],
   imports: [
     BrowserModule,
