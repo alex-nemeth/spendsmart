@@ -22,11 +22,6 @@
   </div>
   <div *ngIf="!hideButtons" class="flex gap-2 mt-4">
     <button
-      *ngIf="loan && amount >= max"
-      class="p-2 text-white bg-green-500 hover:bg-green-600 font-semibold rounded-md me-auto transition-all xl:text-lg"
-      (click)="deleteBudget(id)"
-    ></button>
-    <button
       class="border-cyan-500 border-2 p-2 text-cyan-500 hover:bg-cyan-500 hover:text-white font-semibold rounded-md ms-auto transition-all xl:text-lg"
       (click)="onAddExpenseClick()"
     >
@@ -34,6 +29,7 @@
     </button>
     <button
       class="border-slate-400 border-2 p-2 text-slate-400 hover:bg-slate-400 hover:text-white rounded-md transition-all xl:text-lg"
+      (click)="onViewExpensesClick()"
     >
       View Expenses
     </button>

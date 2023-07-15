@@ -1,12 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BudgetsService } from '../services/budgets.service';
 
 @Component({
   selector: 'app-budget-card',
   templateUrl: './budget-card.component.html',
 })
 export class BudgetCardComponent {
-  constructor(private budgetsService: BudgetsService) {}
+  constructor() {}
   @Input()
   id: string = '';
   @Input()
@@ -21,13 +20,14 @@ export class BudgetCardComponent {
   hideButtons: boolean = false;
 
   @Output() addExpenseClick = new EventEmitter<void>();
+  @Output() viewExpensesClick = new EventEmitter<void>();
 
   onAddExpenseClick() {
     this.addExpenseClick.emit();
   }
 
-  deleteBudget(id: string) {
-    return this.budgetsService.deleteBudget(id);
+  onViewExpensesClick() {
+    this.viewExpensesClick.emit();
   }
 
   colorClass(): string {

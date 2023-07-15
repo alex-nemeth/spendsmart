@@ -16,6 +16,13 @@ export class AppComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   budgets$: Observable<any[]> | null;
   user!: firebase.User | null;
+  currentBudget: IBudget = {
+    amount: 0,
+    expenses: [],
+    id: '',
+    max: 0,
+    title: '',
+  };
   currentBudgetId: string = '';
 
   constructor(private auth: AngularFireAuth, private authService: AuthService) {
@@ -32,7 +39,6 @@ export class AppComponent implements OnInit {
         );
         this.budgets$ = collectionData(collectionInstance);
       }
-      this.budgets$?.subscribe((b) => console.log(b));
     });
   }
 
@@ -42,18 +48,29 @@ export class AppComponent implements OnInit {
 
   addBudgetModal = false;
   addExpenseModal = false;
+  viewExpensesModal = false;
 
   toggleAddBudgetModal(): void {
     this.addBudgetModal = !this.addBudgetModal;
   }
 
   openAddExpenseModal(budgetId: string): void {
-    console.log('click');
     this.currentBudgetId = budgetId;
     this.addExpenseModal = true;
   }
 
   closeAddExpenseModal(): void {
     this.addExpenseModal = false;
+  }
+
+  openViewExpensesModal(budget: IBudget): void {
+    this.currentBudget = budget;
+    this.currentBudgetId = budget.id;
+    console.log('View expenses from app with id of ' + this.currentBudgetId);
+    this.viewExpensesModal = true;
+  }
+
+  closeViewExpensesModal(): void {
+    this.viewExpensesModal = false;
   }
 }
