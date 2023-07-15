@@ -55,7 +55,10 @@
           <div class="text-lg font-semibold md:text-xl">
             {{ expense.amount | currency : "EUR" : "symbol" : "1.0-2" }}
           </div>
-          <button class="hover:bg-gray-200 p-1 rounded-md">
+          <button
+            class="hover:bg-gray-200 p-1 rounded-md"
+            (click)="deleteExpense(expense)"
+          >
             <svg
               aria-hidden="true"
               class="w-5 h-5"
