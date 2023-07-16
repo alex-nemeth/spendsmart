@@ -10,7 +10,7 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import * as dayjs from 'dayjs';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { IBudget, IExpense } from 'src/shared/interfaces';
 import { v4 as uuid } from 'uuid';
 
@@ -29,7 +29,7 @@ export class BudgetsService {
     return budget.expenses.reduce((a, b) => a + b.amount, 0);
   }
 
-  addBudget(budget: any, userId: string) {
+  addBudget(budget: any, userId: string): void {
     const instance = collection(this.firestore, `users/${userId}/budgets`);
     const newBudget: IBudget = {
       ...budget,
@@ -46,7 +46,7 @@ export class BudgetsService {
       });
   }
 
-  deleteBudget(budgetId: string, userId: string) {
+  deleteBudget(budgetId: string, userId: string): void {
     const docInstance = doc(
       this.firestore,
       `users/${userId}/budgets/${budgetId}`
@@ -54,7 +54,7 @@ export class BudgetsService {
     deleteDoc(docInstance).then(() => console.log('Budget deleted'));
   }
 
-  addExpense(expense: any, budget: IBudget, userId: string) {
+  addExpense(expense: any, budget: IBudget, userId: string): void {
     const docInstance = doc(
       this.firestore,
       `users/${userId}/budgets/${budget.id}`
@@ -73,7 +73,7 @@ export class BudgetsService {
       .catch((error) => console.error(error));
   }
 
-  deleteExpense(expense: IExpense, budgetId: string, userId: string) {
+  deleteExpense(expense: IExpense, budgetId: string, userId: string): void {
     const docInstance = doc(
       this.firestore,
       `users/${userId}/budgets/${budgetId}`
@@ -85,50 +85,3 @@ export class BudgetsService {
     });
   }
 }
-
-// private budgetsSubject = new BehaviorSubject<any[]>([]);
-// private expensesSubject = new BehaviorSubject<any[]>([]);
-
-// budgets$: Observable<any[]> = this.budgetsSubject.asObservable();
-// expenses$: Observable<any[]> = this.expensesSubject.asObservable();
-
-// UNCATEGORIZED_BUDGET_ID = 'Uncategorized';
-
-// getBudgetExpenses(budgetId: string): any[] {
-//   const expenses = this.expensesSubject.getValue();
-//   return expenses.filter((expense) => expense.budgetId === budgetId);
-// }
-
-// addExpense(description: string, amount: number, budgetId: string): void {
-//   const expenses = this.expensesSubject.getValue();
-//   const newExpense = { id: uuidv4(), description, amount, budgetId };
-//   this.expensesSubject.next([...expenses, newExpense]);
-// }
-
-// addBudget(name: string, max: number): void {
-//   const budgets = this.budgetsSubject.getValue();
-//   if (budgets.find((budget) => budget.name === name)) return;
-//   const newBudget = { id: uuidv4(), name, max };
-//   this.budgetsSubject.next([...budgets, newBudget]);
-// }
-
-// deleteBudget(id: string): void {
-//   const expenses = this.expensesSubject.getValue();
-//   const budgets = this.budgetsSubject.getValue();
-
-//   const updatedExpenses = expenses.map((expense) => {
-//     if (expense.budgetId !== id) return expense;
-//     return { ...expense, budgetId: this.UNCATEGORIZED_BUDGET_ID };
-//   });
-
-//   const updatedBudgets = budgets.filter((budget) => budget.id !== id);
-
-//   this.expensesSubject.next(updatedExpenses);
-//   this.budgetsSubject.next(updatedBudgets);
-// }
-
-// deleteExpense(id: string): void {
-//   const expenses = this.expensesSubject.getValue();
-//   const updatedExpenses = expenses.filter((expense) => expense.id !== id);
-//   this.expensesSubject.next(updatedExpenses);
-// }
