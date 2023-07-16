@@ -34,21 +34,6 @@ export class ViewExpensesModalComponent {
   }
 
   deleteExpense(expense: IExpense) {
-    const selectedBudgetId = this.budget.id;
-    const selectedExpense = expense;
-    this.auth.authState.subscribe((user) => {
-      if (user) {
-        const docInstance = doc(
-          this.firestore,
-          `users/${user.uid}/budgets/${selectedBudgetId}`
-        );
-        updateDoc(docInstance, {
-          expenses: arrayRemove(selectedExpense),
-        }).then(() => {
-          console.log('Expense deleted!');
-          this.changeDetector.detectChanges();
-        });
-      }
-    });
+    this.budgetsService.deleteExpense(expense, this.budget.id, this.user!.uid);
   }
 }

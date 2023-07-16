@@ -3,6 +3,7 @@ import { collection, doc } from 'firebase/firestore';
 import {
   Firestore,
   addDoc,
+  arrayRemove,
   arrayUnion,
   collectionData,
   deleteDoc,
@@ -10,7 +11,7 @@ import {
 } from '@angular/fire/firestore';
 import * as dayjs from 'dayjs';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { IBudget } from 'src/shared/interfaces';
+import { IBudget, IExpense } from 'src/shared/interfaces';
 import { v4 as uuid } from 'uuid';
 
 @Injectable({
@@ -70,6 +71,18 @@ export class BudgetsService {
         console.log('Expense Added! ' + JSON.stringify(newExpense));
       })
       .catch((error) => console.error(error));
+  }
+
+  deleteExpense(expense: IExpense, budgetId: string, userId: string) {
+    const docInstance = doc(
+      this.firestore,
+      `users/${userId}/budgets/${budgetId}`
+    );
+    updateDoc(docInstance, {
+      expenses: arrayRemove(expense),
+    }).then(() => {
+      console.log('Expense deleted!');
+    });
   }
 }
 
