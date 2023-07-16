@@ -16,6 +16,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewExpensesModalComponent } from './view-expenses-modal/view-expenses-modal.component';
+import { TotalBudgetCardComponent } from './total-budget-card/total-budget-card.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ViewExpensesModalComponent } from './view-expenses-modal/view-expenses-
     AddExpenseModalComponent,
     LoginComponent,
     ViewExpensesModalComponent,
+    TotalBudgetCardComponent,
   ],
   imports: [
     BrowserModule,
