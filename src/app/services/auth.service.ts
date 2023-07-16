@@ -22,4 +22,11 @@ export class AuthService {
       })
     );
   }
+
+  logOut() {
+    this.auth
+      .signOut()
+      .then(() => console.log('Signed out'))
+      .catch((error) => console.error(error));
+  }
 }
