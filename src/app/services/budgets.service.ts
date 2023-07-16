@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { collection, doc } from 'firebase/firestore';
 import {
   Firestore,
+  addDoc,
   arrayUnion,
   collectionData,
+  deleteDoc,
   updateDoc,
 } from '@angular/fire/firestore';
 import * as dayjs from 'dayjs';
@@ -24,6 +26,31 @@ export class BudgetsService {
 
   getBudgetExpensesAmount(budget: IBudget): number {
     return budget.expenses.reduce((a, b) => a + b.amount, 0);
+  }
+
+  addBudget(budget: any, userId: string) {
+    const instance = collection(this.firestore, `users/${userId}/budgets`);
+    const newBudget: IBudget = {
+      ...budget,
+      amount: 0,
+      expenses: [],
+    };
+    addDoc(instance, newBudget)
+      .then((doc) => {
+        console.log('New Budget Created! ID: ' + doc.id);
+        updateDoc(doc, { id: doc.id });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  deleteBudget(budgetId: string, userId: string) {
+    const docInstance = doc(
+      this.firestore,
+      `users/${userId}/budgets/${budgetId}`
+    );
+    deleteDoc(docInstance).then(() => console.log('Budget deleted'));
   }
 
   addExpense(expense: any, budget: IBudget, userId: string) {

@@ -4,6 +4,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
 import { arrayRemove, updateDoc } from 'firebase/firestore';
 import { ChangeDetectorRef } from '@angular/core';
+import firebase from 'firebase/compat/app';
+import { BudgetsService } from '../services/budgets.service';
 
 @Component({
   selector: 'app-view-expenses-modal',
@@ -11,19 +13,14 @@ import { ChangeDetectorRef } from '@angular/core';
 })
 export class ViewExpensesModalComponent {
   constructor(
+    private budgetsService: BudgetsService,
     private auth: AngularFireAuth,
     private firestore: Firestore,
     private changeDetector: ChangeDetectorRef
   ) {}
 
-  @Input() id: string = '';
-  @Input() budget: IBudget = {
-    id: '',
-    title: '',
-    amount: 0,
-    max: 0,
-    expenses: [],
-  };
+  @Input() user!: firebase.User | null;
+  @Input() budget!: IBudget;
 
   @Output() closeModal = new EventEmitter<void>();
 
@@ -32,15 +29,8 @@ export class ViewExpensesModalComponent {
   }
 
   deleteBudget() {
-    this.auth.authState.subscribe((user) => {
-      if (user) {
-        const docInstance = doc(
-          this.firestore,
-          `users/${user.uid}/budgets/${this.id}`
-        );
-        deleteDoc(docInstance).then(() => console.log('Budget deleted'));
-      }
-    });
+    this.budgetsService.deleteBudget(this.budget.id, this.user!.uid);
+    this.handleClose();
   }
 
   deleteExpense(expense: IExpense) {

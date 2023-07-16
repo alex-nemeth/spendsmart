@@ -20,7 +20,7 @@ export class LoginComponent {
     const { email, password } = this.loginForm.value;
     this.auth
       .signInWithEmailAndPassword(email, password)
-      .then((credentials) => {
+      .then(() => {
         console.log('Sign in successfully');
       })
       .catch((error) => {

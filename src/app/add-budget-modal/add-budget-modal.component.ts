@@ -1,5 +1,12 @@
-import { Component, EventEmitter, Output, NgModule } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  NgModule,
+  Input,
+} from '@angular/core';
 import { BudgetsService } from '../services/budgets.service';
+import firebase from 'firebase/compat/app';
 import {
   Firestore,
   collection,
@@ -16,34 +23,14 @@ import { v4 as uuidv4 } from 'uuid';
   templateUrl: './add-budget-modal.component.html',
 })
 export class AddBudgetModalComponent {
-  constructor(private firestore: Firestore, private auth: AngularFireAuth) {}
+  constructor(private budgetsService: BudgetsService) {}
 
+  @Input() user!: firebase.User | null;
   @Output() closeModal = new EventEmitter<void>();
 
   handleSubmit(f: any) {
-    this.auth.authState.subscribe((user) => {
-      if (user) {
-        const uid = user.uid;
-        const collectionInstance = collection(
-          this.firestore,
-          `users/${uid}/budgets`
-        );
-        const newBudget: IBudget = {
-          ...f.value,
-          amount: 0,
-          expenses: [],
-        };
-        addDoc(collectionInstance, newBudget)
-          .then((doc) => {
-            console.log('New Budget Created! ID: ' + doc.id);
-            updateDoc(doc, { id: doc.id });
-            this.handleClose();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    });
+    this.budgetsService.addBudget(f.value, this.user!.uid);
+    this.handleClose();
   }
 
   handleClose() {

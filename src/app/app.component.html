@@ -26,6 +26,7 @@
 
 <app-add-budget-modal
   *ngIf="addBudgetModal"
+  [user]="user"
   (closeModal)="toggleAddBudgetModal()"
 ></app-add-budget-modal>
 
@@ -39,6 +40,6 @@
 <app-view-expenses-modal
   *ngIf="viewExpensesModal"
   [budget]="currentBudget"
-  [id]="currentBudgetId"
+  [user]="user"
   (closeModal)="closeViewExpensesModal()"
 ></app-view-expenses-modal>
