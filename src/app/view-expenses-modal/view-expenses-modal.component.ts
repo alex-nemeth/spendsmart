@@ -28,7 +28,6 @@ export class ViewExpensesModalComponent {
   @Output() closeModal = new EventEmitter<void>();
 
   handleClose() {
-    console.log('handleCLose triggerred');
     this.closeModal.emit();
   }
 

@@ -12,10 +12,10 @@
     <app-budget-card
       *ngFor="let budget of budgets$ | async"
       [id]="budget.id"
-      [amount]="totalAmount(budget)"
+      [amount]="totalBudgetExpenses(budget)"
       [title]="budget.title"
       [max]="budget.max"
-      (addExpenseClick)="openAddExpenseModal(budget.id)"
+      (addExpenseClick)="openAddExpenseModal(budget)"
       (viewExpensesClick)="openViewExpensesModal(budget)"
     ></app-budget-card>
   </div>
@@ -31,7 +31,7 @@
 
 <app-add-expense-modal
   *ngIf="addExpenseModal"
-  [id]="currentBudgetId"
+  [budget]="currentBudget"
   (closeModal)="closeAddExpenseModal()"
 ></app-add-expense-modal>
 

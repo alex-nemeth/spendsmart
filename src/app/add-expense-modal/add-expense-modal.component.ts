@@ -8,7 +8,7 @@ import {
   arrayUnion,
   deleteDoc,
 } from '@angular/fire/firestore';
-import { IExpense } from 'src/shared/interfaces';
+import { IBudget, IExpense } from 'src/shared/interfaces';
 import * as dayjs from 'dayjs';
 import { v4 as uuid } from 'uuid';
 
@@ -18,7 +18,7 @@ import { v4 as uuid } from 'uuid';
 })
 export class AddExpenseModalComponent {
   constructor(private auth: AngularFireAuth, private firestore: Firestore) {}
-  @Input() id: string = '';
+  @Input() budget!: IBudget;
 
   @Output() closeModal = new EventEmitter<void>();
 
@@ -33,7 +33,7 @@ export class AddExpenseModalComponent {
         const uid = user.uid;
         const docInstance = doc(
           this.firestore,
-          `users/${user.uid}/budgets/${this.id}`
+          `users/${user.uid}/budgets/${this.budget.id}`
         );
         const newExpense: Object = {
           id: uuid(),
