@@ -1,4 +1,8 @@
-<div [class]="colorClass()" class="card flex flex-col text-black">
+<div
+  [class]="colorClass()"
+  [ngClass]="{ 'bg-slate-200/[0.9]': gray }"
+  class="card flex flex-col text-black"
+>
   <div class="flex justify-between items-baseline font-semibold text-xl mb-3">
     <div class="text-inherit md:text-2xl lg:text-3xl">
       {{ title }}
@@ -7,7 +11,7 @@
       {{ amount | currency : "EUR" : "symbol" : "1.0-2" }}
       <span
         class="text-black/[0.6] text-sm md:text-lg lg:text-xl ms-1"
-        *ngIf="max != undefined"
+        *ngIf="max"
       >
         / {{ max | currency : "EUR" : "symbol" : "1.0-2" }}
       </span>

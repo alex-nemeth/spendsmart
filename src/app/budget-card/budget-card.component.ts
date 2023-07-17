@@ -13,9 +13,11 @@ export class BudgetCardComponent {
   @Input()
   amount: number = 0;
   @Input()
-  max: number = 100;
+  max: number = 0;
   @Input()
   loan: boolean = false;
+  @Input()
+  gray: boolean = false;
   @Input()
   hideButtons: boolean = false;
 

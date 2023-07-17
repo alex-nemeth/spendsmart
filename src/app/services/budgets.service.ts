@@ -25,6 +25,16 @@ export class BudgetsService {
     return collectionData(instance);
   }
 
+  getAllExpenses(userId: string): number | null {
+    let totalExpenses = null;
+    this.getAllBudgets(userId).subscribe((budgets) => {
+      totalExpenses = budgets
+        ? budgets.reduce((a, b) => a + b.expenses.amount, 0)
+        : null;
+    });
+    return totalExpenses;
+  }
+
   getBudgetExpensesAmount(budget: IBudget): number {
     return budget.expenses.reduce((a, b) => a + b.amount, 0);
   }
