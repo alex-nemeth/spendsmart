@@ -46,32 +46,50 @@
               ngModel
               required
             />
-            <div>
-              <label
-                for="amount"
-                class="block mb-2 text-sm sm:text-md md:text-lg lg:text-xl font-medium text-gray-900"
-              >
-                Amount
-              </label>
-              <input
-                type="number"
-                name="amount"
-                id="amount"
-                placeholder="20"
-                class="bg-gray-100 border border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
-                ngModel
-                required
-                step="{0.01}"
-              />
-            </div>
-            <div class="flex justify-end">
-              <button
-                type="submit"
-                class="w-full text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm sm:text-md md:text-lg lg:text-xl px-5 py-2.5 text-center"
-              >
-                Add Expense
-              </button>
-            </div>
+          </div>
+          <div>
+            <label
+              for="amount"
+              class="block mb-2 text-sm sm:text-md md:text-lg lg:text-xl font-medium text-gray-900"
+            >
+              Amount
+            </label>
+            <input
+              type="number"
+              name="amount"
+              id="amount"
+              placeholder="20"
+              class="bg-gray-100 border border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
+              ngModel
+              required
+              step="{0.01}"
+            />
+          </div>
+          <div>
+            <label
+              for="date"
+              class="block mb-2 text-sm sm:text-md md:text-lg lg:text-xl font-medium text-gray-900"
+            >
+              Date
+            </label>
+            <input
+              type="date"
+              name="date"
+              id="date"
+              placeholder="dayjs()"
+              class="bg-gray-100 border border-gray-300 text-gray-900 text-sm sm:text-md md:text-lg lg:text-xl rounded-lg block w-full p-2.5"
+              ngModel
+              required
+              step="{0.01}"
+            />
+          </div>
+          <div class="flex justify-end">
+            <button
+              type="submit"
+              class="w-full text-white bg-cyan-400 hover:bg-cyan-500 focus:ring-4 focus:outline-none font-medium rounded-lg text-sm sm:text-md md:text-lg lg:text-xl px-5 py-2.5 text-center"
+            >
+              Add Expense
+            </button>
           </div>
         </form>
       </div>
