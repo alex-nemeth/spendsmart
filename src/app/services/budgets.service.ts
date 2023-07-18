@@ -10,7 +10,7 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import * as dayjs from 'dayjs';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { IBudget, IExpense } from 'src/shared/interfaces';
 import { v4 as uuid } from 'uuid';
 
@@ -25,14 +25,16 @@ export class BudgetsService {
     return collectionData(instance);
   }
 
-  getAllExpenses(userId: string): number | null {
-    let totalExpenses = null;
-    this.getAllBudgets(userId).subscribe((budgets) => {
-      totalExpenses = budgets
-        ? budgets.reduce((a, b) => a + b.expenses.amount, 0)
-        : null;
-    });
-    return totalExpenses;
+  getAllExpenses(userId: string): Observable<number> {
+    return this.getAllBudgets(userId).pipe(
+      map((budgets: any[]) => {
+        let totalExpenses = 0;
+        for (const budget of budgets) {
+          totalExpenses += this.getBudgetExpensesAmount(budget);
+        }
+        return totalExpenses;
+      })
+    );
   }
 
   getBudgetExpensesAmount(budget: IBudget): number {

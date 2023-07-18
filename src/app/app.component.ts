@@ -14,7 +14,7 @@ import { IBudget } from 'src/shared/interfaces';
 export class AppComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   budgets$!: Observable<any[]> | null;
-  expenses!: number | null;
+  expenses!: number;
   user!: firebase.User | null;
   currentBudget!: IBudget;
   currentBudgetId!: string;
@@ -29,9 +29,10 @@ export class AppComponent implements OnInit {
       if (user) {
         this.user = user;
         this.budgets$ = this.budgetService.getAllBudgets(user.uid);
-        this.expenses = this.budgetService.getAllExpenses(user.uid);
+        this.budgetService
+          .getAllExpenses(user.uid)
+          .subscribe((expenses) => (this.expenses = expenses));
       }
-      console.log(this.expenses);
     });
   }
 
