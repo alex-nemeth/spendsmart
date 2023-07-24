@@ -9,10 +9,10 @@ import {
   deleteDoc,
 } from '@angular/fire/firestore';
 import firebase from 'firebase/compat/app';
-import { IBudget, IExpense } from 'src/shared/interfaces';
+import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
 import * as dayjs from 'dayjs';
 import { v4 as uuid } from 'uuid';
-import { BudgetsService } from '../services/budgets.service';
+import { BudgetsService } from '../shared/services/budgets.service';
 
 @Component({
   selector: 'app-add-expense-modal',

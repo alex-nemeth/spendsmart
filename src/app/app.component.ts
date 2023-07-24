@@ -1,11 +1,11 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { BudgetsService } from './services/budgets.service';
+import { BudgetsService } from './shared/services/budgets.service';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
-import { AuthService } from './services/auth.service';
-import { IBudget } from 'src/shared/interfaces';
+import { AuthService } from './shared/services/auth.service';
+import { IBudget } from 'src/app/shared/models/interfaces';
 
 @Component({
   selector: 'app-root',

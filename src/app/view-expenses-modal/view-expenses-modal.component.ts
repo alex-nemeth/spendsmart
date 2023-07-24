@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IBudget, IExpense } from 'src/shared/interfaces';
+import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
 import { arrayRemove, updateDoc } from 'firebase/firestore';
 import { ChangeDetectorRef } from '@angular/core';
 import firebase from 'firebase/compat/app';
-import { BudgetsService } from '../services/budgets.service';
+import { BudgetsService } from '../shared/services/budgets.service';
 
 @Component({
   selector: 'app-view-expenses-modal',
