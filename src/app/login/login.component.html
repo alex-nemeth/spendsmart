@@ -1,12 +1,48 @@
-<h1>Sign in to your account!</h1>
-<form [formGroup]="loginForm" (ngSubmit)="logIn()">
-  <div>
-    <label>Email</label>
-    <input type="email" formControlName="email" required />
+<div class="bg-white text-black m-12 rounded-md border-none flex flex-col">
+  <div class="w-min mx-auto mt-4">
+    <h1
+      class="text-2xl lg:text-5xl border-black border-2 p-2 text-center justify-center me-auto hover:cursor-default"
+    >
+      Spend<span class="font-semibold">Smart</span>
+    </h1>
   </div>
-  <div>
-    <label>Password</label>
-    <input type="password" formControlName="password" required />
+  <div class="text-center font-semibold my-4">
+    <h1>Sign in to your account!</h1>
   </div>
-  <button type="submit" [disabled]="loginForm.invalid">Log In</button>
-</form>
+  <form [formGroup]="loginForm" (ngSubmit)="logIn()">
+    <div class="flex flex-col m-6">
+      <label class="font-semibold px-2">Email</label>
+      <input
+        class="border-black border-b-2 selection:border-cyan-700 rounded-md px-2"
+        type="email"
+        formControlName="email"
+        required
+      />
+    </div>
+    <div class="flex flex-col m-6">
+      <label class="font-semibold px-2">Password</label>
+      <input
+        class="border-black border-b-2 rounded-md px-2"
+        type="password"
+        formControlName="password"
+        required
+      />
+    </div>
+    <div class="flex flex-col justify-center items-center mx-6 mt-6 mb-2">
+      <button
+        class="py-2 px-4 bg-cyan-700 text-white w-full rounded-md"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Log In
+      </button>
+    </div>
+  </form>
+  <div class="text-center mb-2">
+    Don't have an account yet?
+    <span
+      class="font-semibold text-cyan-600 hover:text-cyan-700 cursor-pointer transition-all"
+      >Register</span
+    >
+  </div>
+</div>
