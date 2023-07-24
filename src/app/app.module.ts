@@ -17,6 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ViewExpensesModalComponent } from './view-expenses-modal/view-expenses-modal.component';
 import { TotalBudgetCardComponent } from './total-budget-card/total-budget-card.component';
+import { DateToLocalePipe } from './shared/pipes/date-to-locale.pipe';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { TotalBudgetCardComponent } from './total-budget-card/total-budget-card.
     LoginComponent,
     ViewExpensesModalComponent,
     TotalBudgetCardComponent,
+    DateToLocalePipe,
   ],
   imports: [
     BrowserModule,

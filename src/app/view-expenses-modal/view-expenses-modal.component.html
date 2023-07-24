@@ -49,7 +49,7 @@
           class="flex gap-4 items-center mx-6 justify-center mb-2 border-2 border-slate-200 rounded-md p-2"
           key="expense.id"
         >
-          <div>{{ expense.date }}</div>
+          <div>{{ expense.date | dateToLocale }}</div>
           <div class="me-auto text-md md:text-lg lg:text-xl">
             {{ expense.title }}
           </div>
