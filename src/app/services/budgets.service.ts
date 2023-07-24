@@ -73,7 +73,6 @@ export class BudgetsService {
     );
     const newExpense: Object = {
       id: uuid(),
-      date: dayjs().format('DD.MM.YYYY'),
       ...expense,
     };
     updateDoc(docInstance, {
