@@ -54,7 +54,7 @@
           "options": {
             "baseHref": "/spendsmart/"
           }
-        }
+        },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
