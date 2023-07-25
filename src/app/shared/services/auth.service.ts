@@ -9,6 +9,17 @@ import firebase from 'firebase/compat/app';
 export class AuthService {
   constructor(private auth: AngularFireAuth) {}
 
+  logIn(email: string, password: string) {
+    this.auth
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        console.log('Sign in successfully');
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   getCurrentUser(): Observable<firebase.User | null> {
     return this.auth.authState;
   }

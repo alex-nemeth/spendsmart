@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from '../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,10 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private auth: AngularFireAuth, private formBuilder: FormBuilder) {
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder
+  ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
@@ -18,13 +22,6 @@ export class LoginComponent {
 
   logIn() {
     const { email, password } = this.loginForm.value;
-    this.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('Sign in successfully');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    this.authService.logIn(email, password);
   }
 }
