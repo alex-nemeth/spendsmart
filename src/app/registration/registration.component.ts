@@ -16,11 +16,12 @@ export class RegistrationComponent {
     this.registrationForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
   register() {
-    const { email, password, confirmPassword } = this.registrationForm.value;
+    const { email, password } = this.registrationForm.value;
     this.authService.registerUser(email, password);
   }
 

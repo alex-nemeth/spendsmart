@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, doc } from 'firebase/firestore';
+import { collection, doc, setDoc } from 'firebase/firestore';
 import {
   Firestore,
   addDoc,
@@ -39,6 +39,15 @@ export class BudgetsService {
 
   getBudgetExpensesAmount(budget: IBudget): number {
     return budget.expenses.reduce((a, b) => a + b.amount, 0);
+  }
+
+  async createUserDatabase(uid: string, email: string) {
+    try {
+      const userDocRef = doc(this.firestore, `users/${uid}`);
+      await setDoc(userDocRef, { email: email });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   addBudget(budget: any, userId: string): void {

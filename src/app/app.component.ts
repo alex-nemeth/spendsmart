@@ -22,15 +22,15 @@ export class AppComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private budgetService: BudgetsService
+    private budgetsService: BudgetsService
   ) {}
 
   ngOnInit(): void {
     this.authService.getCurrentUser().subscribe((user) => {
       if (user) {
         this.user = user;
-        this.budgets$ = this.budgetService.getAllBudgets(user.uid);
-        this.budgetService
+        this.budgets$ = this.budgetsService.getAllBudgets(user.uid);
+        this.budgetsService
           .getAllExpenses(user.uid)
           .subscribe((expenses) => (this.expenses = expenses));
       }
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
   }
 
   totalBudgetExpenses(budget: IBudget): number {
-    return this.budgetService.getBudgetExpensesAmount(budget);
+    return this.budgetsService.getBudgetExpensesAmount(budget);
   }
 
   addBudgetModal = false;
@@ -70,5 +70,10 @@ export class AppComponent implements OnInit {
 
   closeViewExpensesModal(): void {
     this.viewExpensesModal = false;
+  }
+
+  handleLogOut() {
+    this.authService.logOut();
+    this.user = null;
   }
 }
