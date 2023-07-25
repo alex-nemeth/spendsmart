@@ -20,6 +20,10 @@ export class AuthService {
       });
   }
 
+  registerUser(email: string, password: string) {
+    return this.auth.createUserWithEmailAndPassword(email, password);
+  }
+
   getCurrentUser(): Observable<firebase.User | null> {
     return this.auth.authState;
   }

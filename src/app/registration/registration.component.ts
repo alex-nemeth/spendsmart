@@ -1,33 +1,32 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AuthService } from '../shared/services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+  selector: 'app-registration',
+  templateUrl: './registration.component.html',
 })
-export class LoginComponent {
-  loginForm: FormGroup;
+export class RegistrationComponent {
+  registrationForm: FormGroup;
 
   constructor(
     private authService: AuthService,
     private formBuilder: FormBuilder
   ) {
-    this.loginForm = this.formBuilder.group({
+    this.registrationForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
-  @Output() registrationClick = new EventEmitter<any>();
-
-  onRegistrationClick() {
-    this.registrationClick.emit();
+  register() {
+    const { email, password, confirmPassword } = this.registrationForm.value;
+    this.authService.registerUser(email, password);
   }
 
-  logIn() {
-    const { email, password } = this.loginForm.value;
-    this.authService.logIn(email, password);
+  @Output() loginClick = new EventEmitter<any>();
+
+  onLoginClick() {
+    this.loginClick.emit();
   }
 }

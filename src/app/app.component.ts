@@ -18,6 +18,7 @@ export class AppComponent implements OnInit {
   user!: firebase.User | null;
   currentBudget!: IBudget;
   currentBudgetId!: string;
+  registration: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -43,6 +44,10 @@ export class AppComponent implements OnInit {
   addBudgetModal = false;
   addExpenseModal = false;
   viewExpensesModal = false;
+
+  toggleRegistration() {
+    this.registration = !this.registration;
+  }
 
   toggleAddBudgetModal(): void {
     this.addBudgetModal = !this.addBudgetModal;

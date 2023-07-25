@@ -1,4 +1,11 @@
-<app-login *ngIf="!user"></app-login>
+<app-login
+  *ngIf="!user && !registration"
+  (registrationClick)="toggleRegistration()"
+></app-login>
+<app-registration
+  *ngIf="!user && registration"
+  (loginClick)="toggleRegistration()"
+></app-registration>
 <div *ngIf="user" class="my-4 mx-auto items-center md:w-10/12 xl:w-8/12">
   <app-header (addTrackerClick)="toggleAddBudgetModal()"></app-header>
   <h1
