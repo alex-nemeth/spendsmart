@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "baseHref": "/spendsmart/",
             "outputPath": "dist/ng-spendsmart",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -49,6 +50,11 @@
           },
           "defaultConfiguration": "production"
         },
+        "ghpages": {
+          "options": {
+            "baseHref": "/spendsmart/"
+          }
+        }
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
