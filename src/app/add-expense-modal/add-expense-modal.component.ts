@@ -1,17 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import {
-  Firestore,
-  collection,
-  updateDoc,
-  doc,
-  arrayUnion,
-  deleteDoc,
-} from '@angular/fire/firestore';
 import firebase from 'firebase/compat/app';
-import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
-import * as dayjs from 'dayjs';
-import { v4 as uuid } from 'uuid';
+import { IBudget } from 'src/app/shared/models/interfaces';
 import { BudgetsService } from '../shared/services/budgets.service';
 
 @Component({
