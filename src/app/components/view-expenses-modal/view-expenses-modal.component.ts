@@ -5,7 +5,7 @@ import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
 import { arrayRemove, updateDoc } from 'firebase/firestore';
 import { ChangeDetectorRef } from '@angular/core';
 import firebase from 'firebase/compat/app';
-import { BudgetsService } from '../shared/services/budgets.service';
+import { BudgetsService } from 'src/app/shared/services/budgets.service';
 
 @Component({
   selector: 'app-view-expenses-modal',

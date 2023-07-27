@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { BudgetsService } from '../shared/services/budgets.service';
+import { BudgetsService } from '../../shared/services/budgets.service';
 import firebase from 'firebase/compat/app';
 
 @Component({

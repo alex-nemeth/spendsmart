@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import { IBudget } from 'src/app/shared/models/interfaces';
-import { BudgetsService } from '../shared/services/budgets.service';
+import { BudgetsService } from 'src/app/shared/services/budgets.service';
 
 @Component({
   selector: 'app-add-expense-modal',
