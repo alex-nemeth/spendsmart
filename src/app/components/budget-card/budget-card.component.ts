@@ -3,6 +3,13 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 @Component({
   selector: 'app-budget-card',
   templateUrl: './budget-card.component.html',
+  styles: [
+    `
+      .progress-bar {
+        transition: width 1s;
+      }
+    `,
+  ],
 })
 export class BudgetCardComponent {
   constructor() {}

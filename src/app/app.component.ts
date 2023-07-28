@@ -9,6 +9,7 @@ import { IBudget } from 'src/app/shared/models/interfaces';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
+  styleUrls: ['../styles.css'],
 })
 export class AppComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
