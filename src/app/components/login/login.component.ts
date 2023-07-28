@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  error: boolean = false;
 
   constructor(
     private authService: AuthService,
@@ -21,15 +22,13 @@ export class LoginComponent {
     });
   }
 
-  @Output() registrationClick = new EventEmitter<any>();
-
-  onRegistrationClick() {
-    this.registrationClick.emit();
-  }
-
-  logIn() {
+  async logIn() {
+    this.error = false;
     const { email, password } = this.loginForm.value;
-    this.authService.logIn(email, password);
-    this.router.navigate(['']);
+    const success = await this.authService.logIn(email, password);
+    if (success) {
+      this.error = false;
+      this.router.navigate(['']);
+    } else this.error = true;
   }
 }
