@@ -24,7 +24,7 @@ export class AuthService {
       });
   }
 
-  async registerUser(email: string, password: string) {
+  async registerUser(email: string, password: string): Promise<boolean> {
     try {
       const userCredential = await this.auth.createUserWithEmailAndPassword(
         email,
@@ -32,8 +32,10 @@ export class AuthService {
       );
       const uid = userCredential.user?.uid;
       this.budgetsService.createUserDatabase(uid!, email);
+      return true;
     } catch (error) {
       console.log(error);
+      return false;
     }
     // return this.auth
     //   .createUserWithEmailAndPassword(email, password)
@@ -41,6 +43,15 @@ export class AuthService {
     //     const email = user.credential.;
     //     this.getCurrentUserUID().subscribe(uid => this.budgetsService.addNewUser(uid))
     //   });
+  }
+
+  async isEmailRegistered(email: string): Promise<boolean> {
+    try {
+      const signInMethods = await this.auth.fetchSignInMethodsForEmail(email);
+      return signInMethods.length > 0;
+    } catch (error) {
+      return false;
+    }
   }
 
   getCurrentUser(): Observable<firebase.User | null> {

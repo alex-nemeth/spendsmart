@@ -1,45 +1,62 @@
-<div class="bg-white text-black m-12 rounded-md border-none flex flex-col">
-  <div class="w-min mx-auto mt-4">
+<div
+  class="bg-white text-black m-12 rounded-md border-none flex flex-col max-w-sm sm:max-w-md md:max-w-sm lg:max-w-md xl:max-w-lg mx-auto"
+>
+  <div class="w-min mx-auto mt-4 md:max-w- lg:max-w-xl xl:max-w-2xl">
     <h1
       class="text-2xl lg:text-5xl border-black border-2 p-2 text-center justify-center me-auto hover:cursor-default"
     >
       Spend<span class="font-semibold">Smart</span>
     </h1>
   </div>
-  <div class="text-center font-semibold my-4">
+  <div class="text-center font-semibold my-4 text-lg lg:text-2xl">
     <h1>Create a new account!</h1>
   </div>
   <form [formGroup]="registrationForm" (ngSubmit)="register()">
     <div class="flex flex-col m-6">
-      <label class="font-semibold px-2">Email</label>
+      <label class="font-semibold px-2 text-md lg:text-lg">Email</label>
       <input
         class="border-black border-b-2 selection:border-cyan-700 rounded-md px-2"
         type="email"
         formControlName="email"
+        [ngClass]="{
+          'border-red-500/75': errorMessage === 'Email already in use.'
+        }"
         required
       />
     </div>
     <div class="flex flex-col m-6">
-      <label class="font-semibold px-2">Password</label>
+      <label class="font-semibold px-2 text-md lg:text-lg">Password</label>
       <input
         class="border-black border-b-2 rounded-md px-2"
+        [ngClass]="{
+          'border-red-500/75': errorMessage === 'Passwords do not match.'
+        }"
         type="password"
         formControlName="password"
         required
+        sele
       />
     </div>
     <div class="flex flex-col m-6">
-      <label class="font-semibold px-2">Confirm password</label>
+      <label class="font-semibold px-2 text-md lg:text-lg"
+        >Confirm password</label
+      >
       <input
         class="border-black border-b-2 rounded-md px-2"
+        [ngClass]="{
+          'border-red-500/75': errorMessage === 'Passwords do not match.'
+        }"
         type="password"
         formControlName="confirmPassword"
         required
       />
+      <p *ngIf="error" class="text-center text-red-500 mt-1">
+        {{ errorMessage }}
+      </p>
     </div>
     <div class="flex flex-col justify-center items-center mx-6 mt-6 mb-2">
       <button
-        class="py-2 px-4 bg-cyan-700 text-white w-full rounded-md"
+        class="py-2 px-4 bg-cyan-700 text-white w-full rounded-md text-md lg:text-lg"
         type="submit"
         [disabled]="registrationForm.invalid"
       >
@@ -47,7 +64,7 @@
       </button>
     </div>
   </form>
-  <div class="text-center mb-2">
+  <div class="text-center mb-2 text-sm lg:text-md">
     Already have an account?
     <span
       routerLink="/login"
