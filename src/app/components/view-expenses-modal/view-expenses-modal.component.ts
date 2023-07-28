@@ -1,9 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Firestore, doc, deleteDoc } from '@angular/fire/firestore';
-import { arrayRemove, updateDoc } from 'firebase/firestore';
-import { ChangeDetectorRef } from '@angular/core';
 import firebase from 'firebase/compat/app';
 import { BudgetsService } from 'src/app/shared/services/budgets.service';
 
@@ -12,12 +8,7 @@ import { BudgetsService } from 'src/app/shared/services/budgets.service';
   templateUrl: './view-expenses-modal.component.html',
 })
 export class ViewExpensesModalComponent {
-  constructor(
-    private budgetsService: BudgetsService,
-    private auth: AngularFireAuth,
-    private firestore: Firestore,
-    private changeDetector: ChangeDetectorRef
-  ) {}
+  constructor(private budgetsService: BudgetsService) {}
 
   @Input() user!: firebase.User | null;
   @Input() budget!: IBudget;
@@ -34,6 +25,11 @@ export class ViewExpensesModalComponent {
   }
 
   deleteExpense(expense: IExpense) {
+    // deletes expense from the budget stored in the component first
+    // this ensures that the component is rerendered when the function is called
+    this.budget.expenses = this.budget.expenses.filter(
+      (e) => e.id !== expense.id
+    );
     this.budgetsService.deleteExpense(expense, this.budget.id, this.user!.uid);
   }
 }
