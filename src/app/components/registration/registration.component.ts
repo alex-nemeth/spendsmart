@@ -37,12 +37,6 @@ export class RegistrationComponent {
     }
   }
 
-  @Output() loginClick = new EventEmitter<any>();
-
-  onLoginClick() {
-    this.loginClick.emit();
-  }
-
   passwordMatchCheck(password: string, confirmPassword: string): boolean {
     if (password !== confirmPassword) {
       this.error = true;

@@ -19,7 +19,7 @@
         required
       />
     </div>
-    <div class="flex flex-col m-6">
+    <div class="flex flex-col mx-6 mt-6">
       <label class="font-semibold px-2">Password</label>
       <input
         class="border-black border-b-2 rounded-md px-2"
@@ -28,6 +28,9 @@
         required
       />
     </div>
+    <p *ngIf="error" class="text-center text-red-500 mt-1">
+      {{ "Invalid email or password." }}
+    </p>
     <div class="flex flex-col justify-center items-center mx-6 mt-6 mb-2">
       <button
         class="py-2 px-4 bg-cyan-700 text-white w-full rounded-md"
@@ -42,7 +45,6 @@
     Don't have an account yet?
     <span
       routerLink="/register"
-      (click)="onRegistrationClick()"
       class="font-semibold text-cyan-600 hover:text-cyan-700 cursor-pointer transition-all"
       >Register</span
     >

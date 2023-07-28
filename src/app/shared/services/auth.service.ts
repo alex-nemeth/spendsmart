@@ -13,15 +13,13 @@ export class AuthService {
     private budgetsService: BudgetsService
   ) {}
 
-  logIn(email: string, password: string) {
-    this.auth
-      .signInWithEmailAndPassword(email, password)
-      .then(() => {
-        console.log('Sign in successfully');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  async logIn(email: string, password: string): Promise<boolean> {
+    try {
+      await this.auth.signInWithEmailAndPassword(email, password);
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   async registerUser(email: string, password: string): Promise<boolean> {
@@ -37,12 +35,6 @@ export class AuthService {
       console.log(error);
       return false;
     }
-    // return this.auth
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((user) => {
-    //     const email = user.credential.;
-    //     this.getCurrentUserUID().subscribe(uid => this.budgetsService.addNewUser(uid))
-    //   });
   }
 
   async isEmailRegistered(email: string): Promise<boolean> {
