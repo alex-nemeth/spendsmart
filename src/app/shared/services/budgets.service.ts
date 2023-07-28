@@ -12,6 +12,7 @@ import {
 import { Observable, map } from 'rxjs';
 import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
 import { v4 as uuid } from 'uuid';
+import * as dayjs from 'dayjs';
 
 @Injectable({
   providedIn: 'root',
@@ -75,6 +76,10 @@ export class BudgetsService {
   }
 
   addExpense(expense: any, budget: IBudget, userId: string): void {
+    // Adds todays date if date wasn't selected
+    if (!expense.date) {
+      expense.date = dayjs().format('YYYY-MM-DD');
+    }
     const docInstance = doc(
       this.firestore,
       `users/${userId}/budgets/${budget.id}`
