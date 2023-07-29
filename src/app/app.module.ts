@@ -21,6 +21,7 @@ import { ViewExpensesModalComponent } from './components/view-expenses-modal/vie
 import { TotalBudgetCardComponent } from './components/total-budget-card/total-budget-card.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { StartupComponent } from './components/startup/startup.component';
+import { MonthToStringPipe } from './shared/pipes/month-to-string.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { StartupComponent } from './components/startup/startup.component';
     DateToLocalePipe,
     RegistrationComponent,
     StartupComponent,
+    MonthToStringPipe,
   ],
   imports: [
     BrowserModule,

@@ -25,20 +25,27 @@ export class BudgetsService {
     return collectionData(instance);
   }
 
-  getAllExpenses(userId: string): Observable<number> {
+  getAllExpenses(userId: string, month?: string): Observable<number> {
     return this.getAllBudgets(userId).pipe(
       map((budgets: any[]) => {
         let totalExpenses = 0;
-        for (const budget of budgets) {
-          totalExpenses += this.getBudgetExpensesAmount(budget);
-        }
+        if (month)
+          for (const budget of budgets)
+            totalExpenses += this.getBudgetExpensesAmount(budget, month);
+        else
+          for (const budget of budgets)
+            totalExpenses += this.getBudgetExpensesAmount(budget);
         return totalExpenses;
       })
     );
   }
 
-  getBudgetExpensesAmount(budget: IBudget): number {
-    return budget.expenses.reduce((a, b) => a + b.amount, 0);
+  getBudgetExpensesAmount(budget: IBudget, month?: string): number {
+    if (month)
+      return budget.expenses
+        .filter((expense: IExpense) => expense.date.includes(month))
+        .reduce((a, b) => a + b.amount, 0);
+    else return budget.expenses.reduce((a, b) => a + b.amount, 0);
   }
 
   async createUserDatabase(uid: string, email: string) {

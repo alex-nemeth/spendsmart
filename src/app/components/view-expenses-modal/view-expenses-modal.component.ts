@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
 import firebase from 'firebase/compat/app';
 import { BudgetsService } from 'src/app/shared/services/budgets.service';
@@ -7,13 +7,20 @@ import { BudgetsService } from 'src/app/shared/services/budgets.service';
   selector: 'app-view-expenses-modal',
   templateUrl: './view-expenses-modal.component.html',
 })
-export class ViewExpensesModalComponent {
+export class ViewExpensesModalComponent implements OnInit {
   constructor(private budgetsService: BudgetsService) {}
 
   @Input() user!: firebase.User | null;
   @Input() budget!: IBudget;
-
+  @Input() selectedMonth!: string;
   @Output() closeModal = new EventEmitter<void>();
+  filteredExpenses!: IExpense[];
+
+  ngOnInit(): void {
+    this.filteredExpenses = this.budget.expenses.filter((expense: any) =>
+      expense.date.includes(this.selectedMonth)
+    );
+  }
 
   handleClose() {
     this.closeModal.emit();
