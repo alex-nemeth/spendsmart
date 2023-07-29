@@ -1,10 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BudgetsService } from './shared/services/budgets.service';
-import { Firestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { AuthService } from './shared/services/auth.service';
-import { IBudget } from 'src/app/shared/models/interfaces';
+import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
+import { DateService } from './shared/services/date.service';
 
 @Component({
   selector: 'app-root',
@@ -12,33 +12,63 @@ import { IBudget } from 'src/app/shared/models/interfaces';
   styleUrls: ['../styles.css'],
 })
 export class AppComponent implements OnInit {
-  firestore: Firestore = inject(Firestore);
   budgets$!: Observable<any[]> | null;
   expenses!: number;
   user!: firebase.User | null;
   currentBudget!: IBudget;
   currentBudgetId!: string;
   registration: boolean = false;
+  selectedMonth!: string;
+  previousMonth!: string;
+  nextMonth!: string;
 
   constructor(
     private authService: AuthService,
-    private budgetsService: BudgetsService
+    private budgetsService: BudgetsService,
+    private dateService: DateService
   ) {}
 
   ngOnInit(): void {
+    this.selectedMonth = this.dateService.getCurrentMonth();
+    this.previousMonth = this.dateService.getPreviousMonth(this.selectedMonth);
+    this.nextMonth = this.dateService.getNextMonth(this.selectedMonth);
     this.authService.getCurrentUser().subscribe((user) => {
       if (user) {
         this.user = user;
         this.budgets$ = this.budgetsService.getAllBudgets(user.uid);
         this.budgetsService
-          .getAllExpenses(user.uid)
+          .getAllExpenses(user.uid, this.selectedMonth)
           .subscribe((expenses) => (this.expenses = expenses));
+        console.log(this.expenses);
       }
     });
   }
 
-  totalBudgetExpenses(budget: IBudget): number {
-    return this.budgetsService.getBudgetExpensesAmount(budget);
+  onMonthChange(change?: string) {
+    if (change === 'previous') {
+      this.selectedMonth = this.dateService.getPreviousMonth(
+        this.selectedMonth
+      );
+      this.previousMonth = this.dateService.getPreviousMonth(
+        this.selectedMonth
+      );
+      this.nextMonth = this.dateService.getNextMonth(this.selectedMonth);
+    } else {
+      this.selectedMonth = this.dateService.getNextMonth(this.selectedMonth);
+      this.previousMonth = this.dateService.getPreviousMonth(
+        this.selectedMonth
+      );
+      this.nextMonth = this.dateService.getNextMonth(this.selectedMonth);
+    }
+    this.budgetsService
+      .getAllExpenses(this.user!.uid, this.selectedMonth)
+      .subscribe((expenses) => (this.expenses = expenses));
+  }
+
+  totalBudgetExpenses(budget: IBudget, month?: string): number {
+    return month
+      ? this.budgetsService.getBudgetExpensesAmount(budget, month)
+      : this.budgetsService.getBudgetExpensesAmount(budget);
   }
 
   addBudgetModal = false;

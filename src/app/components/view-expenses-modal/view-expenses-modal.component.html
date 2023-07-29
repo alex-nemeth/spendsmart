@@ -45,7 +45,7 @@
       </div>
       <div class="flex flex-col gap-4 pb-2">
         <div
-          *ngFor="let expense of budget.expenses"
+          *ngFor="let expense of filteredExpenses"
           class="flex gap-4 items-center mx-6 justify-center mb-2 border-2 border-slate-200 rounded-md p-2"
           key="expense.id"
         >
