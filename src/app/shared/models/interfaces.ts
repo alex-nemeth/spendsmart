@@ -4,7 +4,6 @@ export interface IBudget {
   amount: number;
   max: number;
   expenses: IExpense[];
-  date: string;
 }
 
 export interface IExpense {
