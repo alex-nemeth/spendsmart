@@ -3,6 +3,7 @@ export interface IBudget {
   title: string;
   amount: number;
   max: number;
+  timespan: string | undefined;
   expenses: IExpense[];
 }
 

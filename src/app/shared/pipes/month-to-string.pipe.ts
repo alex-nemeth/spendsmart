@@ -4,13 +4,24 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'monthToString',
 })
 export class MonthToStringPipe implements PipeTransform {
-  transform(month: string): string {
-    // Ensure that the input is a valid month string in the format of "XX"
-    if (!/^\d{2}$/.test(month)) {
+  transform(input: string): string {
+    // Ensure that the input is a valid string in the format of "YYYYMM" or "MM"
+    if (!/^(?:\d{4}\d{2}|\d{2})$/.test(input)) {
       return '';
     }
 
-    // Parse the month string to an integer and get the corresponding month name
+    let year: string;
+    let month: string;
+
+    if (input.length === 6) {
+      // If input has 6 characters, extract year and month separately
+      year = input.slice(0, 4);
+      month = input.slice(4);
+    } else {
+      // Return the input unchanged if format is wrong
+      return input;
+    }
+
     const monthNumber = parseInt(month, 10);
     const monthNames = [
       'January',
@@ -27,10 +38,19 @@ export class MonthToStringPipe implements PipeTransform {
       'December',
     ];
 
+    let result = '';
+
     if (monthNumber >= 1 && monthNumber <= 12) {
-      return monthNames[monthNumber - 1];
-    } else {
-      return '';
+      result += monthNames[monthNumber - 1];
     }
+
+    if (year) {
+      if (result.length > 0) {
+        result += ' ';
+      }
+      result += year;
+    }
+
+    return result;
   }
 }

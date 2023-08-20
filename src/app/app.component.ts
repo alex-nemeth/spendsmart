@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { BudgetsService } from './shared/services/budgets.service';
-import { Observable } from 'rxjs';
+import { Observable, map, switchMap, tap } from 'rxjs';
 import firebase from 'firebase/compat/app';
 import { AuthService } from './shared/services/auth.service';
 import { IBudget, IExpense } from 'src/app/shared/models/interfaces';
@@ -12,7 +12,7 @@ import { DateService } from './shared/services/date.service';
   styleUrls: ['../styles.css'],
 })
 export class AppComponent implements OnInit {
-  budgets$!: Observable<any[]> | null;
+  budgets$!: Observable<IBudget[]> | null;
   expenses!: number;
   user!: firebase.User | null;
   currentBudget!: IBudget;
@@ -33,15 +33,28 @@ export class AppComponent implements OnInit {
     this.previousMonth = this.dateService.getPreviousMonth(this.selectedMonth);
     this.nextMonth = this.dateService.getNextMonth(this.selectedMonth);
     this.authService.getCurrentUser().subscribe((user) => {
-      if (user) {
-        this.user = user;
-        this.budgets$ = this.budgetsService.getAllBudgets(user.uid);
-        this.budgetsService
-          .getAllExpenses(user.uid, this.selectedMonth)
-          .subscribe((expenses) => (this.expenses = expenses));
-        console.log(this.expenses);
-      }
+      if (user) this.user = user;
+      this.loadBudgets();
     });
+  }
+
+  loadBudgets() {
+    this.budgets$ = this.budgetsService.getAllBudgets(this.user!.uid).pipe(
+      map((budgets) =>
+        budgets.filter(
+          (budget) =>
+            budget.timespan === this.selectedMonth ||
+            budget.timespan === 'longterm'
+        )
+      ),
+      tap((budgets) => {
+        let totalExpenses = 0;
+        for (const budget of budgets) {
+          totalExpenses += this.budgetsService.getBudgetExpensesAmount(budget);
+        }
+        this.expenses = totalExpenses;
+      })
+    );
   }
 
   onMonthChange(change?: string) {
@@ -60,9 +73,7 @@ export class AppComponent implements OnInit {
       );
       this.nextMonth = this.dateService.getNextMonth(this.selectedMonth);
     }
-    this.budgetsService
-      .getAllExpenses(this.user!.uid, this.selectedMonth)
-      .subscribe((expenses) => (this.expenses = expenses));
+    this.loadBudgets();
   }
 
   totalBudgetExpenses(budget: IBudget, month?: string): number {

@@ -10,10 +10,11 @@ export class AddBudgetModalComponent {
   constructor(private budgetsService: BudgetsService) {}
 
   @Input() user!: firebase.User | null;
+  @Input() selectedMonth!: string;
   @Output() closeModal = new EventEmitter<void>();
 
   handleSubmit(f: any) {
-    this.budgetsService.addBudget(f.value, this.user!.uid);
+    this.budgetsService.addBudget(f.value, this.user!.uid, this.selectedMonth);
     this.handleClose();
   }
 

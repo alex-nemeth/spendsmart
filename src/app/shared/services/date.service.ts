@@ -8,18 +8,36 @@ export class DateService {
   constructor() {}
 
   getCurrentMonth(): string {
-    return dayjs().format('MM');
+    return dayjs().format('YYYYMM');
   }
 
-  getPreviousMonth(month: string): string {
-    let previousMonthNumber = parseInt(month, 10) - 1;
-    if (previousMonthNumber === 0) previousMonthNumber = 12;
-    return previousMonthNumber.toString().padStart(2, '0');
+  getPreviousMonth(yearMonth: string): string {
+    const year = parseInt(yearMonth.slice(0, 4), 10);
+    const month = parseInt(yearMonth.slice(4), 10);
+
+    let previousYear = year;
+    let previousMonth = month - 1;
+
+    if (previousMonth === 0) {
+      previousMonth = 12;
+      previousYear--;
+    }
+
+    return `${previousYear}${previousMonth.toString().padStart(2, '0')}`;
   }
 
-  getNextMonth(month: string): string {
-    let nextMonthNumber = parseInt(month, 10) + 1;
-    if (nextMonthNumber === 13) nextMonthNumber = 1;
-    return nextMonthNumber.toString().padStart(2, '0');
+  getNextMonth(yearMonth: string): string {
+    const year = parseInt(yearMonth.slice(0, 4), 10);
+    const month = parseInt(yearMonth.slice(4), 10);
+
+    let nextYear = year;
+    let nextMonth = month + 1;
+
+    if (nextMonth === 13) {
+      nextMonth = 1;
+      nextYear++;
+    }
+
+    return `${nextYear}${nextMonth.toString().padStart(2, '0')}`;
   }
 }

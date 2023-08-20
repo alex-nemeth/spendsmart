@@ -17,9 +17,7 @@ export class ViewExpensesModalComponent implements OnInit {
   filteredExpenses!: IExpense[];
 
   ngOnInit(): void {
-    this.filteredExpenses = this.budget.expenses.filter((expense: any) =>
-      expense.date.includes(this.selectedMonth)
-    );
+    this.filteredExpenses = this.budget.expenses;
   }
 
   handleClose() {
