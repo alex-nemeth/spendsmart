@@ -29,22 +29,29 @@ export class BudgetsService {
     return this.getAllBudgets(userId).pipe(
       map((budgets: any[]) => {
         let totalExpenses = 0;
-        if (month)
-          for (const budget of budgets)
-            totalExpenses += this.getBudgetExpensesAmount(budget, month);
-        else
-          for (const budget of budgets)
-            totalExpenses += this.getBudgetExpensesAmount(budget);
+        for (const budget of budgets)
+          totalExpenses += this.getBudgetExpensesAmount(budget);
+        return totalExpenses;
+      })
+    );
+  }
+
+  getAllExpensesFromObservable(
+    budgets$: Observable<IBudget[]>
+  ): Observable<number> {
+    return budgets$.pipe(
+      map((budgets: any[]) => {
+        let totalExpenses = 0;
+        for (const budget of budgets) {
+          totalExpenses += this.getBudgetExpensesAmount(budget);
+        }
         return totalExpenses;
       })
     );
   }
 
   getBudgetExpensesAmount(budget: IBudget, month?: string): number {
-    if (month)
-      return budget.expenses
-        .filter((expense: IExpense) => expense.date.includes(month))
-        .reduce((a, b) => a + b.amount, 0);
+    if (month) return budget.expenses.reduce((a, b) => a + b.amount, 0);
     else return budget.expenses.reduce((a, b) => a + b.amount, 0);
   }
 
@@ -57,13 +64,14 @@ export class BudgetsService {
     }
   }
 
-  addBudget(budget: any, userId: string): void {
+  addBudget(budget: any, userId: string, selectedMonth?: string): void {
     const instance = collection(this.firestore, `users/${userId}/budgets`);
-    const newBudget: IBudget = {
+    let newBudget: IBudget = {
       ...budget,
       amount: 0,
       expenses: [],
     };
+    if (budget.timespan === 'monthly') newBudget.timespan = selectedMonth;
     addDoc(instance, newBudget)
       .then((doc) => {
         console.log('New Budget Created! ID: ' + doc.id);
