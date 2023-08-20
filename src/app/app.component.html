@@ -6,13 +6,13 @@
     (logOutClick)="handleLogOut()"
   ></app-header>
   <div
-    class="flex justify-center items-center mx-8 gap-14 text-3xl md:text-4xl lg:text-5xl duration-1000 transition-opacity"
+    class="flex justify-between items-center mx-8 gap-14 text-3xl md:text-4xl lg:text-5xl duration-1000 transition-opacity"
   >
     <h2
-      class="text-2xl md:text-3xl lg:text-4xl text-gray-300 cursor-pointer"
+      class="text-2xl md:text-3xl lg:text-4xl text-gray-300 cursor-pointer hover:text-gray-50"
       (click)="onMonthChange('previous')"
     >
-      {{ previousMonth | monthToString }}
+      <
     </h2>
     <div class="text-center">
       <h1 class="cursor-default text-center">
@@ -20,10 +20,10 @@
       </h1>
     </div>
     <h2
-      class="text-2xl md:text-3xl lg:text-4xl text-gray-300 cursor-pointer"
+      class="text-2xl md:text-3xl lg:text-4xl text-gray-300 cursor-pointer hover:text-red-500"
       (click)="onMonthChange()"
     >
-      {{ nextMonth | monthToString }}
+      >
     </h2>
   </div>
   <h1
@@ -37,7 +37,7 @@
     <app-budget-card
       *ngFor="let budget of budgets$ | async"
       [id]="budget.id"
-      [amount]="totalBudgetExpenses(budget, selectedMonth)"
+      [amount]="totalBudgetExpenses(budget)"
       [title]="budget.title"
       [max]="budget.max"
       (addExpenseClick)="openAddExpenseModal(budget)"
@@ -52,6 +52,7 @@
 <app-add-budget-modal
   *ngIf="addBudgetModal"
   [user]="user"
+  [selectedMonth]="selectedMonth"
   (closeModal)="toggleAddBudgetModal()"
 ></app-add-budget-modal>
 
